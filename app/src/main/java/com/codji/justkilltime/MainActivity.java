@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     case R.id.statistics:
                         intent = new Intent(MainActivity.this, StatisticsActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.sliderin_right, R.anim.sliderout_right);
                 }
             }
         };

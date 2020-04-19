@@ -38,6 +38,6 @@ public class StatisticsActivity extends AppCompatActivity{
     @Override
     public void onBackPressed(){
         finish();
-        overridePendingTransition(R.anim.null_anim, R.anim.sliderout);
+        overridePendingTransition(R.anim.sliderin_left, R.anim.sliderout_left);
     }
 }
