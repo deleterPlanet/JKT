@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Just kill time</string>
+    <string name="support">Жалобы и предложения</string>
+    <string name="web">Сайт</string>
+    <string name="shoop">Магазин</string>
+    <string name="higescore">Рекорд</string>
+    <string name="transitionOpasity">transition_opasity</string>
+    <string name="newHigescore">Новый рекорд</string>
+    <string name="playerColors">Цвета</string>
+    <string name="modes">Режимы</string>
+    <string name="white">Белый</string>
+    <string name="green">Зелённый</string>
+    <string name="yellow">Жёлтый</string>
+    <string name="peach">Персиковый</string>
+    <string name="skip">Пропустить</string>
+    <string name="get_started">Начать</string>
+    <string name="version">Версия 1.0.0</string>
+    <string name="language">Язык</string>
+    <string name="russian">Русский</string>
+    <string name="english">Английский</string>
+    <string name="option">Настройки</string>
+    <string name="aboutGame">Об игре</string>
+    <string name="moneyIntro">В верхнем правом углу отображается количество ваших очков, за которые вы можете что-либо приобрести в магазине</string>
+    <string name="shoopIntro">Для перехода в магазин нажмите на иконку с корзиной</string>
+    <string name="optionIntro">Для перехода в настройки нажмите на шестерёнку в верхнем левом углу</string>
+    <string name="supportIntro">Чтобы написать о проблеме в приложении или пожелании кликните на правую иконку</string>
+    <string name="webIntro">Для перехода на сайт разработчика нажмите на среднюю иконку</string>
+    <string name="higescoreIntro">В центральной части главного меню отображается ваш внутреигровой рекорд</string>
+    <string name="tapToPlayIntro">Нажмите в любой свободной части экрана, чтобы начать играть</string>
+    <string name="playerIntro">Нажимайте на икран, чтобы поменять напровление движения игрока</string>
+    <string name="trianglesIntro">Уворачивайтесь от серых треугольников и собирайте зелённые</string>
+    <string name="scoreIntro">Снизу отображается количество ваших очков</string>
+    <string name="exampleIntro">Вы можете посмотреть как будет выглядеть выбранный вами цвет прямо в магазине</string>
+    <string name="productIntro">Товары в магазине отображаются в формате \"цвет | цена\" или \"угол поворота | цена\". Если вы ещё не купили товар то он будет подсвечен красным</string>
+    <string name="tabsIntro">Товары в магазине делятся на \'цвета\' и \'режимы\'. Чтобы перейти к определённой группе, нажмите на нужную вкладку</string>
+    <string name="codJiWeb">CodJi web</string>
+    <string name="supportText">Поддержка</string>
+    <string name="mission">Миссии</string>
+
+    <array name="missions">
+        <item name="mission0">Наберите n очков</item>
+        <item name="mission1">Наберите n очков за одну игру</item>
+        <item name="mission2">Продержитесь n секунд</item>
+        <item name="mission3">Проведите n секунд в игре</item>
+        <item name="mission4">Сыграйте n раз</item>
+        <item name="mission5">Побейте свой рекорд</item>
+    </array>
+</resources>

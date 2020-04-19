@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/glSurfacePlayerInShop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+
+        <Button
+            android:id="@+id/colorWhite"
+            style="@style/MainActivityOptionButtons"
+            android:text="@string/white"
+            android:background="@drawable/option_but"/>
+
+        <Button
+            android:id="@+id/colorGreen"
+            style="@style/MainActivityOptionButtons"
+            android:background="@drawable/option_but"
+            android:text="@string/green"
+            android:textColor="@color/colorAccent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+
+        <Button
+            android:id="@+id/colorYellow"
+            style="@style/MainActivityOptionButtons"
+            android:text="@string/yellow"
+            android:background="@drawable/option_but"
+            android:textColor="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/colorPeach"
+            style="@style/MainActivityOptionButtons"
+            android:text="@string/peach"
+            android:background="@drawable/option_but"
+            android:textColor="@color/colorAccent"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainRelativeLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MissionActivity"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@color/colorAccent"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:text="@string/mission"
+        android:textSize="20dp"/>
+    
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="200dp"
+            android:layout_height="15dp"
+            android:progressDrawable="@drawable/mission_progress_layout"
+            android:max="3"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-15dp"
+            android:src="@drawable/heart"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/divider_option"
+        android:dividerPadding="3dp"
+        android:showDividers="middle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="120dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/missionImg0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/mission0"
+                style="@style/missionTextView"
+                android:text="Продержитесь n секунд"
+                android:layout_marginLeft="30dp"/>
+
+            <ProgressBar
+                android:id="@+id/missionProgress0"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:progressDrawable="@drawable/mission_progress_layout"/>
+
+            <TextView
+                android:id="@+id/valueProgress0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/missionImg1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/mission1"
+                style="@style/missionTextView"
+                android:text="Соберите n очков"
+                android:layout_marginLeft="30dp"/>
+
+            <ProgressBar
+                android:id="@+id/missionProgress1"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:progressDrawable="@drawable/mission_progress_layout"/>
+
+            <TextView
+                android:id="@+id/valueProgress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/missionImg2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/mission2"
+                style="@style/missionTextView"
+                android:text="Сыграйте n раз"
+                android:layout_marginLeft="30dp"/>
+
+            <ProgressBar
+                android:id="@+id/missionProgress2"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:progressDrawable="@drawable/mission_progress_layout"/>
+
+            <TextView
+                android:id="@+id/valueProgress2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/deg0"
+            style="@style/MainActivityOptionButtons"
+            android:text="0°"
+            android:background="@drawable/option_but"/>
+
+        <Button
+            android:id="@+id/deg90"
+            style="@style/MainActivityOptionButtons"
+            android:background="@drawable/option_but"
+            android:text="90°"/>
+
+        <Button
+            android:id="@+id/deg180"
+            style="@style/MainActivityOptionButtons"
+            android:background="@drawable/option_but"
+            android:text="180°"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/deg270"
+            style="@style/MainActivityOptionButtons"
+            android:text="270°"
+            android:background="@drawable/option_but"/>
+
+        <Button
+            android:id="@+id/deg45"
+            style="@style/MainActivityOptionButtons"
+            android:background="@drawable/option_but"
+            android:text="45°"/>
+
+        <Button
+            android:id="@+id/deg315"
+            style="@style/MainActivityOptionButtons"
+            android:background="@drawable/option_but"
+            android:text="315°"/>
+
+    </LinearLayout>
+
+</LinearLayout>

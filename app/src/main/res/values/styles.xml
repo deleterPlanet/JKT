@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/backgroundColor</item>
+        <item name="colorPrimaryDark">@color/backgroundColor</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="MainActivityOptionButtons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">15dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="Modes_Colors">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">15dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">25dp</item>
+    </style>
+
+    <style name="missionTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="missionProgressBut">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+</resources>
