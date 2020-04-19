@@ -140,6 +140,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         ed.putInt("color1", 0);
                         but.setText(but.getText().toString().split(" ")[0]);
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
                     ed.putFloat("playerRed", 0.26f);
                     ed.putFloat("playerGreen", 0.44f);
@@ -156,6 +157,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         ed.putInt("color2", 0);
                         but.setText(but.getText().toString().split(" ")[0]);
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
                     ed.putFloat("playerRed", 0.92f);
                     ed.putFloat("playerGreen", 0.86f);
@@ -172,6 +174,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         ed.putInt("color3", 0);
                         but.setText(but.getText().toString().split(" ")[0]);
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
                     ed.putFloat("playerRed", 1.0f);
                     ed.putFloat("playerGreen", 0.8f);
@@ -191,6 +194,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         ed.putInt("deg90", 0);
                         but.setText(but.getText().toString().split(" ")[0]);
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
                     ed.putFloat("angleMap", 90.0f);
                 }
@@ -204,6 +208,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         ed.putInt("deg180", 0);
                         but.setText(but.getText().toString().split(" ")[0]);
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
                     ed.putFloat("angleMap", 180.0f);
                 }
@@ -217,6 +222,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         ed.putInt("deg270", 0);
                         but.setText(but.getText().toString().split(" ")[0]);
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
                     ed.putFloat("angleMap", 270.0f);
                 }

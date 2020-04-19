@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         DEATH = -1;
     public static int higescore = 0;
 
-    private int money = 0;
+    private int money = 0, score;
     private long time = 0;
 
     RelativeLayout relLayout;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     GLSurfaceView glSurfaceViewMoney;
     SharedPreferences sPref;
     Intent intent;
+    SharedPreferences.Editor ed;
 
     @Override
     protected void onStart(){
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         overridePendingTransition(R.anim.sliderin_left, R.anim.sliderout_left);
                         break;
                     case R.id.statistics:
-
+                        intent = new Intent(MainActivity.this, StatisticsActivity.class);
+                        startActivity(intent);
                 }
             }
         };
@@ -114,16 +116,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (data == null){return;}
-        SharedPreferences.Editor ed = sPref.edit();
+        ed = sPref.edit();
 
         time += data.getLongExtra("time", 0);
-        ed.putLong("time", time);
         Toast.makeText(this, time + "", Toast.LENGTH_LONG).show();
 
-        int score = data.getIntExtra("score", 0);
+        score = data.getIntExtra("score", 0);
         money += score;
         moneyText.setText(money + "");
-        ed.putInt("money", money);
 
         if(score > higescore){
             higescore = score;
@@ -133,11 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         checkMission(score, data.getLongExtra("time", 0));
 
-        ed.commit();
+        save();
     }
 
     void checkMission(int score, long time){
-        SharedPreferences.Editor ed = sPref.edit();
         for (int i = 0; i < 3;i++){
             int mission = sPref.getInt("mission" + i, -1);
             if (mission == -1){mission = addMission(i);};
@@ -188,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     }
                     break;
             }
-            ed.commit();
         }
     }
 
@@ -221,5 +219,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         MissionActivity.position = (MissionActivity.position == MissionActivity.missionId.length-1)? 0 : MissionActivity.position + 1;
         return randMis;
+    }
+
+    void save(){
+        ed.putInt("money", money);
+
+        ed.putInt("play", sPref.getInt("play", 0) + 1);
+        ed.putInt("points", sPref.getInt("points", 0) + score);
+        ed.putLong("time", time);
+
+        ed.commit();
     }
 }

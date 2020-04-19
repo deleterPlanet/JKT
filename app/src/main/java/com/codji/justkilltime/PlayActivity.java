@@ -87,6 +87,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 direction = -direction;
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putInt("clicks", sPref.getInt("clicks", 0) + 1);
+                ed.commit();
                 break;
         }
         return true;

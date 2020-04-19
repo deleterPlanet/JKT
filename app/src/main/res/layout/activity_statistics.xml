@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainRelativeLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OptionActivity"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/divider_option"
+        android:dividerPadding="3dp"
+        android:showDividers="middle"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/statistics"
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp"
+            android:layout_marginBottom="50dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/play"/>
+
+            <TextView
+                style="@style/missionTextView"
+                android:text="@string/play"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/playText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/triangle"/>
+
+            <TextView
+                style="@style/missionTextView"
+                android:text="@string/all_points"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/pointsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/clook"/>
+
+            <TextView
+                style="@style/missionTextView"
+                android:text="@string/time"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/timeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                style="@style/missionTextView"
+                android:text="@string/goods"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/goodsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                style="@style/missionTextView"
+                android:text="@string/missions_complite"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/missionCompliteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                style="@style/missionTextView"
+                android:text="@string/clicks_count"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/clickText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                style="@style/missionTextView"
+                android:text="@string/extra_lives"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/extraLivesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorAccent"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
