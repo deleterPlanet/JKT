@@ -33,7 +33,6 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
 
     private int money = 0;
     Button playerColorsBut, modesBut;
-    ImageButton optionBut;
     TextView moneyText;
     SharedPreferences sPref;
     GLSurfaceView glSurfaceViewMoney;
@@ -93,11 +92,9 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
         playerColor[2] = sPref.getFloat("playerBlue", 1.0f);
         playerColor[3] = sPref.getFloat("playerAlpha", 1.0f);
 
-        optionBut = (ImageButton)findViewById(R.id.option);
         playerColorsBut = (Button)findViewById(R.id.playerColors);
         modesBut = (Button)findViewById(R.id.modes);
 
-        optionBut.setOnClickListener(this);
         playerColorsBut.setOnClickListener(this);
         modesBut.setOnClickListener(this);
 

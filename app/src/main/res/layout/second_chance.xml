@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:background="@color/backgroundColor">
+
+    <ProgressBar
+        android:id="@+id/timerSecondChance"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="5000"
+        android:progress="2000"
+        android:progressDrawable="@drawable/timer_progress"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/second_chance"/>
+
+    <TextView
+        android:id="@+id/extraLivesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:text="100"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/positiveBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/skip"
+            android:background="@null"
+            android:textSize="15dp"
+            android:textColor="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/negativeBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/secondChance"
+            android:background="@null"
+            android:textSize="15dp"
+            android:textColor="@color/colorAccent"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

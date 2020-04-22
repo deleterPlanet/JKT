@@ -2,6 +2,7 @@ package com.codji.justkilltime;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.opengl.GLSurfaceView;
@@ -18,8 +19,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
-    public static final int  REQ_COD_PLAY_ACTIVITY = 1,
-        DEATH = -1;
+    public static final int  REQ_COD_PLAY_ACTIVITY = 1;
     public static int higescore = 0;
 
     private int money = 0, score;
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ed = sPref.edit();
 
         time += data.getLongExtra("time", 0);
-        Toast.makeText(this, time + "", Toast.LENGTH_LONG).show();
 
         score = data.getIntExtra("score", 0);
         money += score;
@@ -140,53 +139,53 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     void checkMission(int score, long time){
         for (int i = 0; i < 3;i++){
             int mission = sPref.getInt("mission" + i, -1);
+            int missionComplete = sPref.getInt("missionComplete", 0);
             if (mission == -1){mission = addMission(i);};
             switch (mission){
                 case 0:
                     ed.putInt("missionProgress" + i, sPref.getInt("missionProgress" + i, 0) + score);
                     if (sPref.getInt("missionProgress" + i, 0) + score >= sPref.getInt("N0", 0)){
-                        ed.putInt("missionComplite", sPref.getInt("missionComplite", 0) + 1);
+                        ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
-                        Toast.makeText(this, "complite " + i, Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 1:
                     if (score >= sPref.getInt("N1", 0)){
-                        ed.putInt("missionComplite", sPref.getInt("missionComplite", 0) + 1);
+                        ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
-                        Toast.makeText(this, "complite " + i, Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 2:
                     if (Math.floor(time/1000) >= sPref.getInt("N2", 0)){
-                        ed.putInt("missionComplite", sPref.getInt("missionComplite", 0) + 1);
+                        ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
-                        Toast.makeText(this, "complite " + i, Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 3:
                     ed.putInt("missionProgress" + i, sPref.getInt("missionProgress" + i, 0) + (int)Math.floor(time/1000));
                     if (sPref.getInt("missionProgress" + i, 0) + (int)Math.floor(time/1000) >= sPref.getInt("N3", 0)){
-                        ed.putInt("missionComplite", sPref.getInt("missionComplite", 0) + 1);
+                        ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
-                        Toast.makeText(this, "complite " + i, Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 4:
                     ed.putInt("missionProgress" + i, sPref.getInt("missionProgress" + i, 0) + 1);
                     if (sPref.getInt("missionProgress" + i, 0) + 1 >= sPref.getInt("N4", 0)){
-                        ed.putInt("missionComplite", sPref.getInt("missionComplite", 0) + 1);
+                        ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
-                        Toast.makeText(this, "complite " + i, Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 5:
                     if (score > higescore){
-                        ed.putInt("missionComplite", sPref.getInt("missionComplite", 0) + 1);
+                        ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
-                        Toast.makeText(this, "complite " + i, Toast.LENGTH_LONG).show();
                     }
                     break;
+            }
+            ed.commit();
+            if ((missionComplete+1)%3 == 0 && missionComplete != sPref.getInt("missionComplete", 0)){
+                ed.putInt("extraLives", sPref.getInt("extraLives", 0) + 1);
+                Toast.makeText(this, "" + sPref.getInt("extraLives", 0) + 1, Toast.LENGTH_LONG).show();
             }
         }
     }

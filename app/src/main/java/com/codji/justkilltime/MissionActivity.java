@@ -41,7 +41,7 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
         ed = sPref.edit();
 
         progressBar = findViewById(R.id.progress);
-        progress = sPref.getInt("missionComplite", 0);
+        progress = sPref.getInt("missionComplete", 0);
         progressBar.setProgress(progress%3);
 
         progressMissions = new ProgressBar[3];

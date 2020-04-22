@@ -41,9 +41,10 @@
     <string name="all_points">Количество набранных очков</string>
     <string name="time">Время в режиме игры</string>
     <string name="goods">Количество приобретённых в магазине товаров</string>
-    <string name="missions_complite">Количествово пройденных миссий</string>
+    <string name="missions_complete">Количествово пройденных миссий</string>
     <string name="extra_lives">Потрачено дополнительных жизней</string>
     <string name="clicks_count">Количество нажатий</string>
+    <string name="secondChance">Возродиться</string>
 
     <array name="missions">
         <item name="mission0">Наберите n очков</item>

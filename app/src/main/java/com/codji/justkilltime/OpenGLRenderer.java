@@ -49,6 +49,8 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         playerColor[2] = pColors[2];
         playerColor[3] = pColors[3];
         this.angleMap = angleMap;
+
+        startGodMod = new Date().getTime() - 4000;
     }
 
 
@@ -85,6 +87,8 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         spanGreenTriangle(); //инициализация зелённого треугольника (если его нет и если повезёт)
         DrawGreenTriangle(gl); //отрисовка зелённого треугольника если он инициализирован
         DrawEmptyTriangles(gl); //отрисовка вражеских треугольников
+
+        PlayActivity.timerHandler.sendEmptyMessage((int)(new Date().getTime() - startGodMod));
 
         gl.glLoadIdentity();
     }
@@ -341,6 +345,6 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     }
 
     void death(){
-        PlayActivity.handler.sendEmptyMessage(MainActivity.DEATH);
+        PlayActivity.endGameHandler.sendEmptyMessage(1);
     }
 }

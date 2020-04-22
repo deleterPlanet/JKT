@@ -157,7 +157,7 @@
 
             <TextView
                 style="@style/missionTextView"
-                android:text="@string/missions_complite"
+                android:text="@string/missions_complete"
                 android:layout_marginLeft="30dp"/>
 
             <TextView
