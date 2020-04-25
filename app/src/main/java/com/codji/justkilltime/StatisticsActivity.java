@@ -30,9 +30,9 @@ public class StatisticsActivity extends AppCompatActivity{
         ((TextView)findViewById(R.id.pointsText)).setText(sPref.getInt("points", 0) + "");
         ((TextView)findViewById(R.id.timeText)).setText(dateFormat.format(sPref.getLong("time", 0)) + "");
         ((TextView)findViewById(R.id.goodsText)).setText(sPref.getInt("goods", 1) + "");
-        ((TextView)findViewById(R.id.missionCompliteText)).setText(sPref.getInt("missionComplite", 0 ) + "");
+        ((TextView)findViewById(R.id.missionCompliteText)).setText(sPref.getInt("missionComplete", 0 ) + "");
         ((TextView)findViewById(R.id.clickText)).setText(sPref.getInt("clicks", 0) + "");
-        ((TextView)findViewById(R.id.extraLivesText)).setText(sPref.getInt("extraLives", 0) + "");
+        ((TextView)findViewById(R.id.extraLivesText)).setText(sPref.getInt("extraLivesSpend", 0) + "");
     }
 
     @Override

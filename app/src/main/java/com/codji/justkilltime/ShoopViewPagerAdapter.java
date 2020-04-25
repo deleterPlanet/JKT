@@ -68,11 +68,17 @@ public class ShoopViewPagerAdapter extends PagerAdapter {
     }
 
     void fillColorsSet(){
-        colorsSet = new Button[4];
+        colorsSet = new Button[10];
         colorsSet[0] = layoutScreen.findViewById(R.id.colorWhite);
         colorsSet[1] = layoutScreen.findViewById(R.id.colorGreen);
         colorsSet[2] = layoutScreen.findViewById(R.id.colorYellow);
         colorsSet[3] = layoutScreen.findViewById(R.id.colorPeach);
+        colorsSet[4] = layoutScreen.findViewById(R.id.colorBlue);
+        colorsSet[5] = layoutScreen.findViewById(R.id.colorCrimson);
+        colorsSet[6] = layoutScreen.findViewById(R.id.colorChocolate);
+        colorsSet[7] = layoutScreen.findViewById(R.id.colorPistachio);
+        colorsSet[8] = layoutScreen.findViewById(R.id.colorOrange);
+        colorsSet[9] = layoutScreen.findViewById(R.id.colorTurquoise);
 
         for (int i = 0; i < colorsSet.length; i++){
             SharedPreferences sPref = mContext.getSharedPreferences("Variables", 0);

@@ -1,6 +1,7 @@
 package com.codji.justkilltime;
 
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -13,7 +14,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
-    private long startGodMod;
+    private long startGodMod, startSecondChanceDialog;
     private int triangleCount = 6,
             frameNum = 0,
             score = 0;
@@ -37,7 +38,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
             sw[];
     private boolean ISGreenTriangle = false,
             ISGetGreenTriangle = false,
-            ISGodMod = false;
+            ISDeath = false;
     private final String TAG = "MyTag";
     ByteBuffer byteBuffer;
     FloatBuffer vertexBuffer,
@@ -81,6 +82,15 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
         setAngleMap(gl);
+
+        if(ISDeath){
+            death();
+            rad -= 0.002;
+            if (rad < minSw){
+                if(PlayActivity.ISSecondChance){PlayActivity.endGameHandler.sendEmptyMessage(PlayActivity.END_GAME_ID);}
+                return;
+            }
+        }
 
         spanPlayerZone(gl); //отрисовка игровой зоны
         drawPlayer(gl); //отрисовка игрока
@@ -176,9 +186,9 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     }
 
     void checkCollTriangle(float coord[], boolean ISItGreenTriangle){
-        if (((coord[0] < playerSpeed*frameNum+rad && coord[0] > playerSpeed*frameNum-rad && coord[1] > -rad && coord[1] < rad)
-        || (coord[3] < playerSpeed*frameNum+rad && coord[3] > playerSpeed*frameNum-rad && coord[4] > -rad && coord[4] < rad)
-        || (coord[6] < playerSpeed*frameNum+rad && coord[6] > playerSpeed*frameNum-rad && coord[7] > -rad && coord[7] < rad))
+        if (((coord[0] < playerSpeed*frameNum+rad*0.75 && coord[0] > playerSpeed*frameNum-rad*0.5 && coord[1] > -rad*0.5 && coord[1] < rad*0.5)
+        || (coord[3] < playerSpeed*frameNum+rad*0.75 && coord[3] > playerSpeed*frameNum-rad*0.5 && coord[4] > -rad*0.5 && coord[4] < rad*0.5)
+        || (coord[6] < playerSpeed*frameNum+rad*0.75 && coord[6] > playerSpeed*frameNum-rad*0.5 && coord[7] > -rad*0.5 && coord[7] < rad*0.5))
         && new Date().getTime() - startGodMod > 3000){
             if(ISItGreenTriangle){
                 if(!ISGetGreenTriangle){
@@ -220,9 +230,12 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
                 }
                 verticesGreenTriangle = new float[]{};
                 ISGreenTriangle = false;
-            }else {
-                centers[pos] = (pos == 0) ? newTriangle(screenHeight - step, pos) : newTriangle(centers[pos - 1][1], pos);
-                vertices[pos] = TurnTriangle(centers[pos], angles[pos], pos);
+            }else{
+                if (ISDeath){centers[pos] = null; vertices[pos] = new float[]{};}
+                else {
+                    centers[pos] = (pos == 0) ? newTriangle(screenHeight - step, pos) : newTriangle(centers[pos - 1][1], pos);
+                    vertices[pos] = TurnTriangle(centers[pos], angles[pos], pos);
+                }
             }
         }
     }
@@ -231,18 +244,21 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         if (ISGreenTriangle){
             verticesGreenTriangle = TurnTriangle(centers[centers.length-1], angles[angles.length-1], sw.length-1);
             drawTriangle(gl, verticesGreenTriangle, new float[]{0.0f, 1.0f, 0.0f, 1.0f});
+
             if (speedX[speedX.length-1] > 0.0f){
                 angles[angles.length-1] -= 0.5f;
             }else{
                 angles[angles.length-1] += 0.5f;
             }
+
             checkCollTriangle(verticesGreenTriangle, true);
+
             if (ISGetGreenTriangle){
                 toSmalTriangle(sw.length-1);
             }
             centers[centers.length-1][1] -= speedY;
             centers[centers.length-1][0] += speedX[speedX.length-1];
-            if (centers[centers.length-1][1] < bottomLine){
+            if (centers[centers.length-1][1] < bottomLine || ISDeath){
                 toSmalTriangle(sw.length-1);
             }
         }
@@ -250,6 +266,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     void DrawEmptyTriangles(GL10 gl){
         for (int i = 0; i < vertices.length; i++){
+            if (centers[i] == null){continue;}
             vertices[i] = TurnTriangle(centers[i], angles[i], i);
             checkCollTriangle(vertices[i], false);
             drawTriangle(gl, vertices[i], new float[]{0.6f, 0.6f, 0.6f, 1.0f});
@@ -260,7 +277,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
             }
             centers[i][1] -= speedY;
             centers[i][0] += speedX[i];
-            if (vertices[i][1] < bottomLine){
+            if (vertices[i][1] < bottomLine || ISDeath){
                 toSmalTriangle(i);
             }
         }
@@ -345,6 +362,13 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     }
 
     void death(){
-        PlayActivity.endGameHandler.sendEmptyMessage(1);
+        if(!ISDeath) {
+            if (!PlayActivity.ISSecondChance){
+                PlayActivity.endGameHandler.sendEmptyMessage(PlayActivity.SHOW_DIALOG);
+            }
+            startSecondChanceDialog = new Date().getTime();
+            ISDeath = true;
+        }
+        if (new Date().getTime() - startSecondChanceDialog > 5000){PlayActivity.endGameHandler.sendEmptyMessage(PlayActivity.END_GAME_ID);}
     }
 }

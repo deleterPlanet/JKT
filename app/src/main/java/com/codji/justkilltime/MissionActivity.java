@@ -20,6 +20,7 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
     public static int position = 0;
     public static int missionId[] = new int[]{0, 1, 2, 3, 4, 5};
 
+    int NowMission[] = new int[]{missionId.length, missionId.length, missionId.length};
     final String TAG = "MyTag";
     int randMis, randN, progress;
     String missions[] = new String[]{};
@@ -39,6 +40,16 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
 
         sPref = getSharedPreferences("Variables", 0);
         ed = sPref.edit();
+        if (sPref.getInt("missionId0", -1) != -1){
+            for (int i = 0; i < missionId.length; i++){
+                missionId[i] = sPref.getInt("missionId" + i, -1);
+            }
+        }
+        if (sPref.getInt("NowMission0", -1) != -1){
+            for (int i = 0; i < NowMission.length; i++){
+                NowMission[i] = sPref.getInt("NowMission" + i, -1);
+            }
+        }
 
         progressBar = findViewById(R.id.progress);
         progress = sPref.getInt("missionComplete", 0);
@@ -65,10 +76,14 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
         mission1 = findViewById(R.id.mission1);
         mission2 = findViewById(R.id.mission2);
 
+        position = sPref.getInt("position", 0);
+
         setMission(mission0, 0);
         setMission(mission1, 1);
         setMission(mission2, 2);
 
+        ed.putInt("position", position);
+        ed.commit();
     }
 
     @Override
@@ -87,9 +102,22 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        if(position == 0){spanNewRandArray();}
+        if(position == 0){
+            spanNewRandArray(ed);
+            for (int i = 0; i < missionId.length;i++) {
+                ed.putInt("missionId" + i, missionId[i]);
+            }
+            ed.commit();
+        }
+        Log.d("MyTag", missionId[0]+" "+missionId[1]+" "+missionId[2]+" "+missionId[3]+" "+missionId[4]+" "+missionId[5]+" ");
 
         randMis = missionId[position];
+        while (randMis == NowMission[0] || randMis == NowMission[1] || randMis == NowMission[2]){
+            Log.d("MyTag", randMis+"=="+NowMission[0]+"||"+randMis+"=="+NowMission[1]+"||"+randMis+"=="+NowMission[2]+" : "+position);
+            position = (position == missionId.length-1)? 0 : position + 1;
+            if(position == 0){spanNewRandArray(ed);}
+            randMis = missionId[position];
+        }
         randN = sPref.getInt("N" + randMis, 0) + ((randMis == 0 || randMis == 3)? (int)Math.round((Math.random())) + 1 : 1);
         if (randMis < 5){
             String s[] = missions[randMis].split("n");
@@ -109,7 +137,13 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
         }else{
             missionText.setText(missions[randMis]);
             ed.putString("missionText" + pos, missions[randMis]);
+            ed.putInt("missionProgress" + pos, 0);
+            ed.putInt("N" + randMis, 1);
         }
+
+        NowMission[pos] = randMis;
+        ed.putInt("NowMission" + pos, randMis);
+
         ed.putInt("mission" + pos, randMis);
         ed.commit();
         setImgs(pos);
@@ -117,7 +151,7 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
         position = (position == missionId.length-1)? 0 : position + 1;
     }
 
-    public static void spanNewRandArray(){
+    public static void spanNewRandArray(SharedPreferences.Editor ed){
         Random rnd = new Random();
         for(int i = 0; i < missionId.length; i++) {
             int index = rnd.nextInt(i + 1);
@@ -139,7 +173,7 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
     void setMissionProgress(int pos){
         int setProgress = sPref.getInt("missionProgress" + pos, 0);
         progressMissions[pos].setProgress(setProgress);
-        progressMissions[pos].setMax(sPref.getInt("N" + pos, 0));
+        progressMissions[pos].setMax(sPref.getInt("N" + sPref.getInt("mission" + pos, 0), 0));
 
         progressValues[pos].setText("" + setProgress);
         progressValues[pos].setPadding(0, 0, 120 - ((setProgress + "").length() - 1)*15, 0);

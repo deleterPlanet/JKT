@@ -1,8 +1,5 @@
 package com.codji.justkilltime;
 
-import android.animation.ObjectAnimator;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -12,7 +9,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -29,12 +25,13 @@ import java.util.Date;
 public class PlayActivity extends AppCompatActivity implements View.OnTouchListener {
 
     public static GLSurfaceView glSurfaceView;
+    public static final int SHOW_DIALOG = 500, END_GAME_ID = 10000, SECOND_CHANCE_ID = 20000, END_DIALOG_TIME = 1000;
     public static float scaleX, scaleY;
     public static Handler handler, timerHandler, endGameHandler;
     public static int direction = 1;
+    public static boolean ISSecondChance;
 
-    private int score = 0, extraLives;
-    private boolean ISSecondChance = false;
+    private int score = 0;
 
     RelativeLayout relLayout;
     final String TAG = "MyTag";
@@ -44,10 +41,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
     ProgressBar progressTimer;
     RelativeLayout timer;
     Animation animStart, animEnd;
-    AlertDialog.Builder builder;
-    LayoutInflater inflater;
     Intent intent;
     GLSurfaceView newSurfaceView;
+    CustomDialogFragment dialog = null;
 
 
     @Override
@@ -56,7 +52,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(R.layout.play_activity);
         sPref = getSharedPreferences("Variables", 0);
 
-        extraLives = sPref.getInt("extraLives", 0);
+        ISSecondChance = false;
 
         start = new Date();
 
@@ -69,11 +65,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
 
         endGameHandler = new Handler(){
             public void handleMessage (android.os.Message msg){
-                if (extraLives > 0 && !ISSecondChance) {
-                    showDialog(1);
-                    glSurfaceView.onPause();
-                }else{
-                    endGame();
+                if (sPref.getInt("extraLives", 0) == 0){endGame();}else {
+                    switch (msg.what) {
+                        case END_GAME_ID: endGame(); break;
+                        case SECOND_CHANCE_ID: secondChance(); break;
+                        case SHOW_DIALOG: showCustomDialog(); break;
+                    }
                 }
             }
         };
@@ -159,46 +156,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
 
     }
 
-    protected Dialog onCreateDialog(int id){
-        builder = new AlertDialog.Builder(this);
-        inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.second_chance, null);
-        builder.setView(v);
-        v.findViewById(R.id.positiveBut).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                endGame();
-            }
-        });
-        v.findViewById(R.id.negativeBut).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sPref.edit().putInt("extraLives", sPref.getInt("extraLives", 0) - 1).commit();
-                ISSecondChance = true;
-                dismissDialog(1);
-
-                relLayout.removeView(findViewById(R.id.glSurface));
-                newSurfaceView.setId(R.id.glSurface);
-                newSurfaceView.setRenderer(new OpenGLRenderer(new float[]{sPref.getFloat("playerRed", 1.0f),
-                        sPref.getFloat("playerGreen", 1.0f),
-                        sPref.getFloat("playerBlue", 1.0f),
-                        sPref.getFloat("playerAlpha", 1.0f)}, sPref.getFloat("angleMap", 0.0f)));
-                relLayout.addView(newSurfaceView, 0);
-            }
-        });
-
-        return builder.create();
-    }
-
-    protected void onPrepareDialog(int id, Dialog dialog) {
-        super.onPrepareDialog(id, dialog);
-        ((TextView)(dialog).findViewById(R.id.extraLivesCount)).setText(sPref.getInt("extraLives", 0) + "");
-        ObjectAnimator animator = ObjectAnimator.ofInt(dialog.findViewById(R.id.timerSecondChance), "progress", 0, 5000);
-
-        animator.setDuration(5000);
-        animator.start();
-    }
-
     void endGame(){
         intent = new Intent();
         intent.putExtra("score", score);
@@ -206,6 +163,29 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
         setResult(RESULT_OK, intent);
         finish();
         overridePendingTransition(R.anim.alpha_for_transition_in, R.anim.alpha_for_transition_out);
+    }
+
+    void secondChance(){
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt("extraLives", sPref.getInt("extraLives", 0) - 1);
+        ed.putInt("extraLivesSpend", sPref.getInt("extraLivesSpend", 0) + 1);
+        ed.commit();
+        dialog.dismiss();
+        glSurfaceView.onPause();
+        ISSecondChance = true;
+
+        relLayout.removeView(findViewById(R.id.glSurface));
+        newSurfaceView.setId(R.id.glSurface);
+        newSurfaceView.setRenderer(new OpenGLRenderer(new float[]{sPref.getFloat("playerRed", 1.0f),
+                sPref.getFloat("playerGreen", 1.0f),
+                sPref.getFloat("playerBlue", 1.0f),
+                sPref.getFloat("playerAlpha", 1.0f)}, sPref.getFloat("angleMap", 0.0f)));
+        relLayout.addView(newSurfaceView, 0);
+    }
+
+    void showCustomDialog(){
+        dialog = new CustomDialogFragment(sPref.getInt("extraLives", 0));
+        dialog.show(getSupportFragmentManager(), "custom");
     }
 
     @Override

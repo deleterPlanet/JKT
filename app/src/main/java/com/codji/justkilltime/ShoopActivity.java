@@ -2,17 +2,12 @@ package com.codji.justkilltime;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -75,10 +70,16 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
 
         sPref = getSharedPreferences("Variables", 0);
         SharedPreferences.Editor ed = sPref.edit();
-        if (sPref.getInt("color0", -1) == -1){ed.putInt("color0", 0);}
-        if (sPref.getInt("color1", -1) == -1){ed.putInt("color1", 2);}
-        if (sPref.getInt("color2", -1) == -1){ed.putInt("color2", 3);}
-        if (sPref.getInt("color3", -1) == -1){ed.putInt("color3", 4);}
+        if (sPref.getInt("color0", -1) == -1){ed.putInt("color0", 0);} // White
+        if (sPref.getInt("color1", -1) == -1){ed.putInt("color1", 2);} // Green
+        if (sPref.getInt("color2", -1) == -1){ed.putInt("color2", 3);} // Yellow
+        if (sPref.getInt("color3", -1) == -1){ed.putInt("color3", 4);} // Peach
+        if (sPref.getInt("color4", -1) == -1){ed.putInt("color4", 5);} // Blue
+        if (sPref.getInt("color5", -1) == -1){ed.putInt("color5", 6);} // Crimson
+        if (sPref.getInt("color6", -1) == -1){ed.putInt("color6", 7);} // Chocolate
+        if (sPref.getInt("color7", -1) == -1){ed.putInt("color7", 8);} // Pistachio
+        if (sPref.getInt("color8", -1) == -1){ed.putInt("color8", 9);} // Orange
+        if (sPref.getInt("color9", -1) == -1){ed.putInt("color9", 10);} // Turquoise
         if (sPref.getInt("deg0", -1) == -1){ed.putInt("deg0", 0);}
         if (sPref.getInt("deg90", -1) == -1){ed.putInt("deg90", 2);}
         if (sPref.getInt("deg180", -1) == -1){ed.putInt("deg180", 3);}
@@ -139,9 +140,9 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
                         ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
-                    ed.putFloat("playerRed", 0.26f);
-                    ed.putFloat("playerGreen", 0.44f);
-                    ed.putFloat("playerBlue", 0.11f);
+                    ed.putFloat("playerRed", 0.46f);
+                    ed.putFloat("playerGreen", 0.68f);
+                    ed.putFloat("playerBlue", 0.04f);
                     ed.putFloat("playerAlpha", 1.0f);
                 }
                 break;
@@ -156,9 +157,9 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                         but.setTextColor(getResources().getColor(R.color.colorAccent));
                         ed.putInt("goods", sPref.getInt("goods", 1) + 1);
                     }
-                    ed.putFloat("playerRed", 0.92f);
-                    ed.putFloat("playerGreen", 0.86f);
-                    ed.putFloat("playerBlue", 0.2f);
+                    ed.putFloat("playerRed", 0.85f);
+                    ed.putFloat("playerGreen", 0.87f);
+                    ed.putFloat("playerBlue", 0.17f);
                     ed.putFloat("playerAlpha", 1.0f);
                 }
                 break;
@@ -176,6 +177,108 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                     ed.putFloat("playerRed", 1.0f);
                     ed.putFloat("playerGreen", 0.8f);
                     ed.putFloat("playerBlue", 0.6f);
+                    ed.putFloat("playerAlpha", 1.0f);
+                }
+                break;
+            case R.id.colorBlue:
+                cost = sPref.getInt("color4", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("color4", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("playerRed", 0.13f);
+                    ed.putFloat("playerGreen", 0.61f);
+                    ed.putFloat("playerBlue", 0.76f);
+                    ed.putFloat("playerAlpha", 1.0f);
+                }
+                break;
+            case R.id.colorCrimson:
+                cost = sPref.getInt("color5", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("color5", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("playerRed", 0.86f);
+                    ed.putFloat("playerGreen", 0.08f);
+                    ed.putFloat("playerBlue", 0.24f);
+                    ed.putFloat("playerAlpha", 1.0f);
+                }
+                break;
+            case R.id.colorChocolate:
+                cost = sPref.getInt("color6", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("color6", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("playerRed", 0.55f);
+                    ed.putFloat("playerGreen", 0.36f);
+                    ed.putFloat("playerBlue", 0.26f);
+                    ed.putFloat("playerAlpha", 1.0f);
+                }
+                break;
+            case R.id.colorPistachio:
+                cost = sPref.getInt("color7", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("color7", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("playerRed", 0.84f);
+                    ed.putFloat("playerGreen", 0.96f);
+                    ed.putFloat("playerBlue", 0.56f);
+                    ed.putFloat("playerAlpha", 1.0f);
+                }
+                break;
+            case R.id.colorOrange:
+                cost = sPref.getInt("color8", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("color8", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("playerRed", 0.92f);
+                    ed.putFloat("playerGreen", 0.55f);
+                    ed.putFloat("playerBlue", 0.21f);
+                    ed.putFloat("playerAlpha", 1.0f);
+                }
+                break;
+            case R.id.colorTurquoise:
+                cost = sPref.getInt("color9", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("color9", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("playerRed", 0.19f);
+                    ed.putFloat("playerGreen", 0.84f);
+                    ed.putFloat("playerBlue", 0.78f);
                     ed.putFloat("playerAlpha", 1.0f);
                 }
                 break;

@@ -45,6 +45,12 @@
     <string name="extra_lives">Потрачено дополнительных жизней</string>
     <string name="clicks_count">Количество нажатий</string>
     <string name="secondChance">Возродиться</string>
+    <string name="Blue">Синий</string>
+    <string name="Crimson">Малиновый</string>
+    <string name="Chocolate">Шоколадный</string>
+    <string name="Turquoise">Бирюзовый</string>
+    <string name="Orange">Оранжевый</string>
+    <string name="Pistachio">Фисташковый</string>
 
     <array name="missions">
         <item name="mission0">Наберите n очков</item>

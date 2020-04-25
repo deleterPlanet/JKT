@@ -2,7 +2,6 @@ package com.codji.justkilltime;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.opengl.GLSurfaceView;
@@ -13,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 
@@ -25,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int money = 0, score;
     private long time = 0;
 
+
+    int missionId[] = new int[]{0, 1, 2, 3, 4, 5},
+            NowMission[] = new int[]{missionId.length, missionId.length, missionId.length};
     RelativeLayout relLayout;
     ImageButton missionBut, shoopBut, statisticsBut, optionBut;
     TextView higescoreText, moneyText, tapToPlay;
@@ -125,21 +126,34 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         money += score;
         moneyText.setText(money + "");
 
-        if(score > higescore){
+        checkMission(score, data.getLongExtra("time", 0));
+
+        if (score > higescore){
             higescore = score;
             higescoreText.setText(score + "");
             ed.putInt("higescore", score);
         }
 
-        checkMission(score, data.getLongExtra("time", 0));
-
         save();
     }
 
     void checkMission(int score, long time){
+        if (sPref.getInt("missionId0", -1) != -1){
+            for (int i = 0; i < missionId.length; i++){
+                missionId[i] = sPref.getInt("missionId" + i, -1);
+            }
+        }
+        if (sPref.getInt("NowMission0", -1) != -1){
+            for (int i = 0; i < NowMission.length; i++){
+                NowMission[i] = sPref.getInt("NowMission" + i, -1);
+            }
+        }
+        MissionActivity.position = sPref.getInt("position", 0);
+
         for (int i = 0; i < 3;i++){
             int mission = sPref.getInt("mission" + i, -1);
             int missionComplete = sPref.getInt("missionComplete", 0);
+            boolean ISComplete = false;
             if (mission == -1){mission = addMission(i);};
             switch (mission){
                 case 0:
@@ -147,18 +161,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     if (sPref.getInt("missionProgress" + i, 0) + score >= sPref.getInt("N0", 0)){
                         ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
+                        ISComplete = true;
                     }
                     break;
                 case 1:
                     if (score >= sPref.getInt("N1", 0)){
                         ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
+                        ISComplete = true;
                     }
                     break;
                 case 2:
                     if (Math.floor(time/1000) >= sPref.getInt("N2", 0)){
                         ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
+                        ISComplete = true;
                     }
                     break;
                 case 3:
@@ -166,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     if (sPref.getInt("missionProgress" + i, 0) + (int)Math.floor(time/1000) >= sPref.getInt("N3", 0)){
                         ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
+                        ISComplete = true;
                     }
                     break;
                 case 4:
@@ -173,19 +191,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     if (sPref.getInt("missionProgress" + i, 0) + 1 >= sPref.getInt("N4", 0)){
                         ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
+                        ISComplete = true;
                     }
                     break;
                 case 5:
                     if (score > higescore){
                         ed.putInt("missionComplete", missionComplete + 1);
                         ed.putString("missionText" + i, "");
+                        ISComplete = true;
                     }
                     break;
             }
             ed.commit();
-            if ((missionComplete+1)%3 == 0 && missionComplete != sPref.getInt("missionComplete", 0)){
-                ed.putInt("extraLives", sPref.getInt("extraLives", 0) + 1);
-                Toast.makeText(this, "" + sPref.getInt("extraLives", 0) + 1, Toast.LENGTH_LONG).show();
+            if (ISComplete){
+                ed.putInt("NowMission" + i, missionId.length);
+                if ((missionComplete+1)%3 == 0 && missionComplete != sPref.getInt("missionComplete", 0)){
+                    ed.putInt("extraLives", sPref.getInt("extraLives", 0) + 1);
+                }
             }
         }
     }
@@ -194,9 +216,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         SharedPreferences.Editor ed = sPref.edit();
         String missions[] = getResources().getStringArray(R.array.missions);
 
-        if(MissionActivity.position == 0){MissionActivity.spanNewRandArray();}
+        if(MissionActivity.position == 0){MissionActivity.spanNewRandArray(ed);}
 
         int randMis = MissionActivity.missionId[MissionActivity.position];
+        while (randMis == NowMission[0] || randMis == NowMission[1] || randMis == NowMission[2]){
+            MissionActivity.position = (MissionActivity.position == missionId.length-1)? 0 : MissionActivity.position + 1;
+            if(MissionActivity.position == 0){MissionActivity.spanNewRandArray(ed);}
+            randMis = missionId[MissionActivity.position];
+        }
 
         int randN = sPref.getInt("N" + randMis, 0) + ((randMis == 0 || randMis == 3)? (int)Math.round((Math.random())) + 1 : 1);
         if (randMis < 5){
@@ -213,7 +240,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             ed.putInt("N" + randMis, randN);
         }else{
             ed.putString("missionText" + pos, missions[randMis]);
+            ed.putString("missionText" + pos, missions[randMis]);
+            ed.putInt("missionProgress" + pos, 0);
+            ed.putInt("N" + randMis, 1);
         }
+        NowMission[pos] = randMis;
+        ed.putInt("NowMission" + pos, randMis);
+
         ed.putInt("mission" + pos, randMis);
         ed.commit();
 

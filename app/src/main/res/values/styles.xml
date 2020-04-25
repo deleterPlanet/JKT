@@ -45,4 +45,8 @@
         <item name="android:layout_weight">1</item>
     </style>
 
+    <style name="dialogTheme">
+        <item name="android:windowEnterAnimation">@anim/dialog_second_chance_start</item>
+        <item name="android:windowExitAnimation">@anim/dialog_second_chance_end</item>
+    </style>
 </resources>
