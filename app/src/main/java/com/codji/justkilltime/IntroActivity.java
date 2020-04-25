@@ -49,17 +49,20 @@ public class IntroActivity extends AppCompatActivity {
         final List<ScreenItem> mList = new ArrayList<>();
         mList.add(new ScreenItem(getString(R.string.moneyIntro),R.drawable.money));
         mList.add(new ScreenItem(getString(R.string.shoopIntro),R.drawable.shoop));
-        mList.add(new ScreenItem(getString(R.string.optionIntro),R.drawable.option));
-        mList.add(new ScreenItem(getString(R.string.supportIntro),R.drawable.support));
-        mList.add(new ScreenItem(getString(R.string.webIntro),R.drawable.my_web));
+        mList.add(new ScreenItem(getString(R.string.missionsIntro),R.drawable.missions));
+        mList.add(new ScreenItem(getString(R.string.statisticsIntro),R.drawable.statistics));
+
+        mList.add(new ScreenItem(getString(R.string.missionsItemIntro),R.drawable.item));
+        mList.add(new ScreenItem(getString(R.string.missionsCompleteItem),R.drawable.missions_complete));
+
         mList.add(new ScreenItem(getString(R.string.playerIntro),R.drawable.player));
         mList.add(new ScreenItem(getString(R.string.trianglesIntro),R.drawable.triangles));
+        mList.add(new ScreenItem(getString(R.string.displayTimerIntro),R.drawable.timer));
+        mList.add(new ScreenItem(getString(R.string.godModIntro),R.drawable.god_mod));
+
         mList.add(new ScreenItem(getString(R.string.productIntro),R.drawable.product));
-        /*mList.add(new ScreenItem(getString(R.string.higescoreIntro),R.drawable.higescore));
-        mList.add(new ScreenItem(getString(R.string.tapToPlayIntro),R.drawable.tap_to_play));
-        mList.add(new ScreenItem(getString(R.string.scoreIntro),R.drawable.score));
-        mList.add(new ScreenItem(getString(R.string.exampleIntro),R.drawable.example));
-        mList.add(new ScreenItem(getString(R.string.tabsIntro),R.drawable.tabs));*/
+
+        mList.add(new ScreenItem(getString(R.string.HaveNiceGame),0));
 
         screenPager =findViewById(R.id.screen_viewpager);
         introViewPagerAdapter = new IntroViewPagerAdapter(this,mList);
