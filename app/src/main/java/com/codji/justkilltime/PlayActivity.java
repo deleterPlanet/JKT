@@ -120,7 +120,13 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
         glSurfaceView.setRenderer(new OpenGLRenderer(new float[]{sPref.getFloat("playerRed", 1.0f),
                 sPref.getFloat("playerGreen", 1.0f),
                 sPref.getFloat("playerBlue", 1.0f),
-                sPref.getFloat("playerAlpha", 1.0f)}, sPref.getFloat("angleMap", 0.0f)));
+                sPref.getFloat("playerAlpha", 1.0f)},
+                sPref.getFloat("angleMap", 0.0f),
+                new float[]{sPref.getFloat("trianglesColorRed", 0.6f),
+                        sPref.getFloat("trianglesColorGreen", 0.6f),
+                        sPref.getFloat("trianglesColorBlue", 0.6f),
+                        sPref.getFloat("trianglesColorAlpha", 1.0f)},
+                sPref.getFloat("playerVertices", 30.0f)));
     }
 
     @Override
@@ -179,7 +185,13 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
         newSurfaceView.setRenderer(new OpenGLRenderer(new float[]{sPref.getFloat("playerRed", 1.0f),
                 sPref.getFloat("playerGreen", 1.0f),
                 sPref.getFloat("playerBlue", 1.0f),
-                sPref.getFloat("playerAlpha", 1.0f)}, sPref.getFloat("angleMap", 0.0f)));
+                sPref.getFloat("playerAlpha", 1.0f)},
+                sPref.getFloat("angleMap", 0.0f),
+                new float[]{sPref.getFloat("trianglesColorRed", 0.6f),
+                sPref.getFloat("trianglesColorGreen", 0.6f),
+                sPref.getFloat("trianglesColorBlue", 0.6f),
+                sPref.getFloat("trianglesColorAlpha", 1.0f)},
+                sPref.getFloat("playerVertices", 30.0f)));
         relLayout.addView(newSurfaceView, 0);
     }
 

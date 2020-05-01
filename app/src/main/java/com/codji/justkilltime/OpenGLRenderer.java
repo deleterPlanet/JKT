@@ -1,7 +1,6 @@
 package com.codji.justkilltime;
 
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,13 +27,15 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
             tellestTrianglePos,
             minSw = 0.001f,
             screeWidth = 1.6f,
-            angleMap;
+            angleMap,
+            playerVertices;
     private float vertices[][],
             centers[][];
     private float verticesGreenTriangle[],
             speedX[],
             angles[],
             playerColor[] = new float[4],
+            emptyTrianglesColor[] = new float[4],
             sw[];
     private boolean ISGreenTriangle = false,
             ISGetGreenTriangle = false,
@@ -44,7 +45,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     FloatBuffer vertexBuffer,
             vertexBufferPlayer;
 
-    OpenGLRenderer(float[] pColors, float angleMap){
+    OpenGLRenderer(float[] pColors, float angleMap, float[] trianglesColor, float playerVertices){
         playerColor[0] = pColors[0];
         playerColor[1] = pColors[1];
         playerColor[2] = pColors[2];
@@ -52,6 +53,13 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         this.angleMap = angleMap;
 
         startGodMod = new Date().getTime() - 4000;
+
+        emptyTrianglesColor[0] = trianglesColor[0];
+        emptyTrianglesColor[1] = trianglesColor[1];
+        emptyTrianglesColor[2] = trianglesColor[2];
+        emptyTrianglesColor[3] = trianglesColor[3];
+
+        this.playerVertices = playerVertices;
     }
 
 
@@ -151,7 +159,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     void drawPlayer(GL10 gl){
         float theta;
         float pi = (float)Math.PI;
-        float step = 6.0f;
+        float step = 360.0f/(playerVertices*2);
         float verticesPlayer[] = new float[Math.round(360/step*3)+3];
         verticesPlayer[0] = playerSpeed*frameNum; verticesPlayer[1] = 0.0f; verticesPlayer[2] = 0.0f;
         int k = 3;
@@ -269,7 +277,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
             if (centers[i] == null){continue;}
             vertices[i] = TurnTriangle(centers[i], angles[i], i);
             checkCollTriangle(vertices[i], false);
-            drawTriangle(gl, vertices[i], new float[]{0.6f, 0.6f, 0.6f, 1.0f});
+            drawTriangle(gl, vertices[i], new float[]{emptyTrianglesColor[0], emptyTrianglesColor[1], emptyTrianglesColor[2], emptyTrianglesColor[3]} );
             if (speedX[i] > 0.0f){
                 angles[i] -= 0.5f;
             }else{

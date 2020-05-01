@@ -20,14 +20,16 @@ public class ShopOpenGLRenderer implements GLSurfaceView.Renderer {
     public static int frameNum = 0;
     private float playerSpeed = 0.01f,
             rad = 0.08f,
-            screeWidth = 1.6f;
+            screeWidth = 1.6f,
+            playerVertices;
     private final String TAG = "MyTag";
     ByteBuffer byteBuffer;
     FloatBuffer vertexBufferPlayer;
     ViewPager viewPager;
 
-    ShopOpenGLRenderer(ViewPager viewPager){
+    ShopOpenGLRenderer(ViewPager viewPager, float playerVertices){
         this.viewPager = viewPager;
+        this.playerVertices = playerVertices;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class ShopOpenGLRenderer implements GLSurfaceView.Renderer {
     void drawPlayer(GL10 gl){
         float theta;
         float pi = (float)Math.PI;
-        float step = 6.0f;
+        float step = 360.0f/(playerVertices*2);
         float verticesPlayer[] = new float[Math.round(360/step*3)+3];
         verticesPlayer[0] = playerSpeed*frameNum; verticesPlayer[1] = 0.0f; verticesPlayer[2] = 0.0f;
         int k = 3;

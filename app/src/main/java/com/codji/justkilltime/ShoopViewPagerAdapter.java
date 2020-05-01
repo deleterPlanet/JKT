@@ -19,6 +19,8 @@ import java.util.List;
 
 public class ShoopViewPagerAdapter extends PagerAdapter {
 
+    float playerVertices;
+
    Context mContext ;
    List<LinearLayout> mListScreen;
    Button colorsSet[], modesSet[];
@@ -26,12 +28,13 @@ public class ShoopViewPagerAdapter extends PagerAdapter {
    Button modesBut, playerColorsBut;
    ViewPager viewPager;
 
-    public ShoopViewPagerAdapter(Context mContext, List<LinearLayout> mListScreen, Button modesBut, Button playerColorsBut, ViewPager viewPager) {
+    public ShoopViewPagerAdapter(Context mContext, List<LinearLayout> mListScreen, Button modesBut, Button playerColorsBut, ViewPager viewPager, float playerVertices) {
         this.mContext = mContext;
         this.mListScreen = mListScreen;
         this.modesBut = modesBut;
         this.playerColorsBut = playerColorsBut;
         this.viewPager = viewPager;
+        this.playerVertices = playerVertices;
     }
 
 
@@ -41,7 +44,7 @@ public class ShoopViewPagerAdapter extends PagerAdapter {
         layoutScreen = mListScreen.get(position);
 
         if (position == 0){
-            ((GLSurfaceView)layoutScreen.findViewById(R.id.glSurfacePlayerInShop)).setRenderer(new ShopOpenGLRenderer(viewPager));
+            ((GLSurfaceView)layoutScreen.findViewById(R.id.glSurfacePlayerInShop)).setRenderer(new ShopOpenGLRenderer(viewPager, playerVertices));
             fillColorsSet();
         }else{
             fillModesSet();

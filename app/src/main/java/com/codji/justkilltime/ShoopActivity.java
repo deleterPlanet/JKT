@@ -109,7 +109,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
         list.add((LinearLayout)inflater.inflate(R.layout.modes_layout,null));
 
         viewPager = (ViewPager)findViewById(R.id.shoopViewPager);
-        viewPager.setAdapter(new ShoopViewPagerAdapter(this, list, modesBut, playerColorsBut, viewPager));
+        viewPager.setAdapter(new ShoopViewPagerAdapter(this, list, modesBut, playerColorsBut, viewPager, sPref.getFloat("playerVertices", 30.0f)));
 
         glSurfaceViewMoney = (GLSurfaceView)findViewById(R.id.glSurfaceViewMoney);
         scaleYShop = 9.0f;

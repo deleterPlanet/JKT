@@ -6,6 +6,8 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,15 +24,17 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
 
     int NowMission[] = new int[]{missionId.length, missionId.length, missionId.length};
     final String TAG = "MyTag";
-    int randMis, randN, progress;
+    int randMis, randN, progress, extraLivesCount, defCount = 6;
     String missions[] = new String[]{};
     TextView mission0, mission1, mission2;
     ImageView imgs[];
     SharedPreferences sPref;
     SharedPreferences.Editor ed;
     ProgressBar progressBar;
+    TextView extraLives;
     ProgressBar progressMissions[];
     TextView progressValues[];
+    ImageButton rewards[];
 
 
     @Override
@@ -50,6 +54,11 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
                 NowMission[i] = sPref.getInt("NowMission" + i, -1);
             }
         }
+
+        extraLivesCount = sPref.getInt("extraLives", 0);
+
+        extraLives = findViewById(R.id.missionExtraLivesCount);
+        extraLives.setText(extraLivesCount + "");
 
         progressBar = findViewById(R.id.progress);
         progress = sPref.getInt("missionComplete", 0);
@@ -82,15 +91,263 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
         setMission(mission1, 1);
         setMission(mission2, 2);
 
+        setReward();
+
         ed.putInt("position", position);
         ed.commit();
     }
 
     @Override
     public void onClick(View v) {
+        int count;
         switch (v.getId()){
+            case R.id.playerVertices6:
+                count = sPref.getInt("playerVertices0", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("playerVertices0", 0);
+                    }
+                    ed.putFloat("playerVertices", 6);
 
+                    int a = sPref.getInt("nowPlayerVertices", -1);
+                    if (a != -1){
+                        rewards[a].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 0){
+                            ed.remove("nowPlayerVertices");
+                            ed.putFloat("playerVertices", 30);
+                            break;
+                        }
+                    }
+                    rewards[0].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowPlayerVertices", 0);
+                }
+                break;
+            case R.id.playerVertices8:
+                count = sPref.getInt("playerVertices1", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("playerVertices1", 0);
+                    }
+                    ed.putFloat("playerVertices", 8);
+
+                    int a = sPref.getInt("nowPlayerVertices", -1);
+                    if (a != -1){
+                        rewards[a].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 1){
+                            ed.remove("nowPlayerVertices");
+                            ed.putFloat("playerVertices", 30);
+                            break;
+                        }
+                    }
+                    rewards[1].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowPlayerVertices", 1);
+                }
+                break;
+            case R.id.playerVertices12:
+                count = sPref.getInt("playerVertices2", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("playerVertices2", 0);
+                    }
+                    ed.putFloat("playerVertices", 12);
+
+                    int a = sPref.getInt("nowPlayerVertices", -1);
+                    if (a != -1){
+                        rewards[a].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 2){
+                            ed.remove("nowPlayerVertices");
+                            ed.putFloat("playerVertices", 30);
+                            break;
+                        }
+                    }
+                    rewards[2].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowPlayerVertices", 2);
+                }
+                break;
+
+            case R.id.trianglesColor0:
+                count = sPref.getInt("trianglesColor0", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("trianglesColor0", 0);
+                    }
+                    ed.putFloat("trianglesColorRed", 0.59f);
+                    ed.putFloat("trianglesColorGreen", 0.72f);
+                    ed.putFloat("trianglesColorBlue", 0.85f);
+                    ed.putFloat("trianglesColorAlpha", 1.0f);
+
+                    int a = sPref.getInt("nowTrianglesColor", -1);
+                    if (a != -1){
+                        rewards[a + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 0){
+                            ed.remove("nowTrianglesColor");
+                            ed.putFloat("trianglesColorRed", 0.6f);
+                            ed.putFloat("trianglesColorGreen", 0.6f);
+                            ed.putFloat("trianglesColorBlue", 0.6f);
+                            ed.putFloat("trianglesColorAlpha", 1.0f);
+                            break;
+                        }
+                    }
+                    rewards[3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowTrianglesColor", 0);
+                }
+                break;
+            case R.id.trianglesColor1:
+                count = sPref.getInt("trianglesColor1", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("trianglesColor1", 0);
+                    }
+                    ed.putFloat("trianglesColorRed", 0.95f);
+                    ed.putFloat("trianglesColorGreen", 0.94f);
+                    ed.putFloat("trianglesColorBlue", 0.85f);
+                    ed.putFloat("trianglesColorAlpha", 1.0f);
+
+                    int a = sPref.getInt("nowTrianglesColor", -1);
+                    if (a != -1){
+                        rewards[a + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 1){
+                            ed.remove("nowTrianglesColor");
+                            ed.putFloat("trianglesColorRed", 0.6f);
+                            ed.putFloat("trianglesColorGreen", 0.6f);
+                            ed.putFloat("trianglesColorBlue", 0.6f);
+                            ed.putFloat("trianglesColorAlpha", 1.0f);
+                            break;
+                        }
+                    }
+                    rewards[4].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowTrianglesColor", 1);
+                }
+                break;
+            case R.id.trianglesColor2:
+                count = sPref.getInt("trianglesColor2", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("trianglesColor2", 0);
+                    }
+                    ed.putFloat("trianglesColorRed", 0.91f);
+                    ed.putFloat("trianglesColorGreen", 0.81f);
+                    ed.putFloat("trianglesColorBlue", 0.53f);
+                    ed.putFloat("trianglesColorAlpha", 1.0f);
+
+                    int a = sPref.getInt("nowTrianglesColor", -1);
+                    if (a != -1){
+                        rewards[a + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 2){
+                            ed.remove("nowTrianglesColor");
+                            ed.putFloat("trianglesColorRed", 0.6f);
+                            ed.putFloat("trianglesColorGreen", 0.6f);
+                            ed.putFloat("trianglesColorBlue", 0.6f);
+                            ed.putFloat("trianglesColorAlpha", 1.0f);
+                            break;
+                        }
+                    }
+                    rewards[5].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowTrianglesColor", 2);
+                }
+                break;
+            case R.id.trianglesColor3:
+                count = sPref.getInt("trianglesColor3", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("trianglesColor3", 0);
+                    }
+                    ed.putFloat("trianglesColorRed", 0.14f);
+                    ed.putFloat("trianglesColorGreen", 0.37f);
+                    ed.putFloat("trianglesColorBlue", 0.51f);
+                    ed.putFloat("trianglesColorAlpha", 1.0f);
+
+                    int a = sPref.getInt("nowTrianglesColor", -1);
+                    if (a != -1){
+                        rewards[a + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 3){
+                            ed.remove("nowTrianglesColor");
+                            ed.putFloat("trianglesColorRed", 0.6f);
+                            ed.putFloat("trianglesColorGreen", 0.6f);
+                            ed.putFloat("trianglesColorBlue", 0.6f);
+                            ed.putFloat("trianglesColorAlpha", 1.0f);
+                            break;
+                        }
+                    }
+                    rewards[6].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowTrianglesColor", 3);
+                }
+                break;
+            case R.id.trianglesColor4:
+                count = sPref.getInt("trianglesColor4", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("trianglesColor4", 0);
+                    }
+                    ed.putFloat("trianglesColorRed", 0.7f);
+                    ed.putFloat("trianglesColorGreen", 0.48f);
+                    ed.putFloat("trianglesColorBlue", 0.39f);
+                    ed.putFloat("trianglesColorAlpha", 1.0f);
+
+                    int a = sPref.getInt("nowTrianglesColor", -1);
+                    if (a != -1){
+                        rewards[a + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 4){
+                            ed.remove("nowTrianglesColor");
+                            ed.putFloat("trianglesColorRed", 0.6f);
+                            ed.putFloat("trianglesColorGreen", 0.6f);
+                            ed.putFloat("trianglesColorBlue", 0.6f);
+                            ed.putFloat("trianglesColorAlpha", 1.0f);
+                            break;
+                        }
+                    }
+                    rewards[7].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowTrianglesColor", 4);
+                }
+                break;
+            case R.id.trianglesColor5:
+                count = sPref.getInt("trianglesColor5", defCount);
+                if (count <= extraLivesCount){
+                    if (count != 0){
+                        extraLivesCount -= count;
+                        extraLives.setText(extraLivesCount + "");
+                        ed.putInt("trianglesColor5", 0);
+                    }
+                    ed.putFloat("trianglesColorRed", 0.23f);
+                    ed.putFloat("trianglesColorGreen", 0.9f);
+                    ed.putFloat("trianglesColorBlue", 0.79f);
+                    ed.putFloat("trianglesColorAlpha", 1.0f);
+
+                    int a = sPref.getInt("nowTrianglesColor", -1);
+                    if (a != -1){
+                        rewards[a + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_black95));
+                        if (a == 5){
+                            ed.remove("nowTrianglesColor");
+                            ed.putFloat("trianglesColorRed", 0.6f);
+                            ed.putFloat("trianglesColorGreen", 0.6f);
+                            ed.putFloat("trianglesColorBlue", 0.6f);
+                            ed.putFloat("trianglesColorAlpha", 1.0f);
+                            break;
+                        }
+                    }
+                    rewards[8].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+                    ed.putInt("nowTrianglesColor", 5);
+                }
+                break;
         }
+        ed.putInt("extraLives", extraLivesCount);
+        ed.commit();
     }
 
     void setMission(TextView missionText, int pos){
@@ -183,5 +440,35 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
     public void onBackPressed(){
         finish();
         overridePendingTransition(R.anim.sliderin_right, R.anim.sliderout_right);
+    }
+
+    void setReward(){
+        rewards = new ImageButton[9];
+        rewards[0] = findViewById(R.id.playerVertices6);
+        rewards[1] = findViewById(R.id.playerVertices8);
+        rewards[2] = findViewById(R.id.playerVertices12);
+        rewards[3] = findViewById(R.id.trianglesColor0);
+        rewards[4] = findViewById(R.id.trianglesColor1);
+        rewards[5] = findViewById(R.id.trianglesColor2);
+        rewards[6] = findViewById(R.id.trianglesColor3);
+        rewards[7] = findViewById(R.id.trianglesColor4);
+        rewards[8] = findViewById(R.id.trianglesColor5);
+
+        for (int i = 0; i < rewards.length; i++){
+            String s = (i < 3)? "playerVertices" + i : "trianglesColor" + (i - 3);
+
+            if (sPref.getInt(s, defCount) == defCount){
+                rewards[i].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_red));
+            }
+            rewards[i].setOnClickListener(this);
+        }
+
+        if (sPref.getInt("nowPlayerVertices", -1) != -1){
+            rewards[sPref.getInt("nowPlayerVertices", -1)].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+        }
+
+        if (sPref.getInt("nowTrianglesColor", -1) != -1){
+            rewards[sPref.getInt("nowTrianglesColor", -1) + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
+        }
     }
 }
