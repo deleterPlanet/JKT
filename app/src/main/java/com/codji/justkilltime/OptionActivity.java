@@ -2,19 +2,25 @@ package com.codji.justkilltime;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+
+import java.util.Locale;
 
 
 public class OptionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,14 +30,36 @@ public class OptionActivity extends AppCompatActivity implements View.OnClickLis
     LinearLayout aboutGame, web, support;
     Intent intent;
     SharedPreferences sPref;
+    CompoundButton.OnCheckedChangeListener onChecked;
+    SharedPreferences.Editor ed;
+    SwitchCompat languageSwitch;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sPref = getSharedPreferences("Variables", 0);
+        ed = sPref.edit();
+        setLanguage();
+
         setContentView(R.layout.activity_option);
 
-        sPref = getSharedPreferences("Variables", 0);
+        onChecked = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    ed.putString("language", "en");
+                }else{
+                    ed.putString("language", "ru");
+                }
+                ed.commit();
+                finish();
+            }
+        };
+
+        languageSwitch = findViewById(R.id.languageSwitch);
+        if (sPref.getString("language", "en").equals("en")){languageSwitch.setChecked(true);}
+        languageSwitch.setOnCheckedChangeListener(onChecked);
 
         aboutGame = (LinearLayout)findViewById(R.id.aboutGameLayout);
         web = (LinearLayout)findViewById(R.id.web);
@@ -65,5 +93,13 @@ public class OptionActivity extends AppCompatActivity implements View.OnClickLis
     public void onBackPressed(){
         finish();
         overridePendingTransition(R.anim.null_anim, R.anim.sliderout);
+    }
+
+    void setLanguage(){
+        Locale locale = new Locale(sPref.getString("language", "en"));
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
     }
 }

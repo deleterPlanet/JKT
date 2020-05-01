@@ -49,4 +49,17 @@
         <item name="android:windowEnterAnimation">@anim/dialog_second_chance_start</item>
         <item name="android:windowExitAnimation">@anim/dialog_second_chance_end</item>
     </style>
+
+    <style name="Switch" parent="Theme.AppCompat.Light">
+        <!-- активное состояние -->
+        <item name="colorControlActivated">@color/backgroundColor</item>
+
+        <!-- неактивное состояние ползунка -->
+        <item name="colorSwitchThumbNormal">@color/backgroundColor</item>
+
+        <!-- цвет дорожки для неактивного состояния -->
+        <item name="android:colorForeground">@color/intro_description_color</item>
+
+        <item name="trackTint">@color/intro_description_color</item>
+    </style>
 </resources>

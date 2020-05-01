@@ -1,6 +1,7 @@
 package com.codji.justkilltime;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZoneOffset;
+import java.util.Locale;
 import java.util.TimeZone;
 
 
@@ -20,8 +22,10 @@ public class StatisticsActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statistics);
         sPref = getSharedPreferences("Variables", 0);
+        setLanguage();
+
+        setContentView(R.layout.activity_statistics);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -39,5 +43,13 @@ public class StatisticsActivity extends AppCompatActivity{
     public void onBackPressed(){
         finish();
         overridePendingTransition(R.anim.sliderin_left, R.anim.sliderout_left);
+    }
+
+    void setLanguage(){
+        Locale locale = new Locale(sPref.getString("language", "en"));
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
     }
 }

@@ -2,6 +2,7 @@ package com.codji.justkilltime;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class ShoopActivity extends AppCompatActivity implements View.OnClickListener {
@@ -45,6 +47,10 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sPref = getSharedPreferences("Variables", 0);
+        SharedPreferences.Editor ed = sPref.edit();
+        setLanguage();
+
         setContentView(R.layout.shoop_activity);
 
         handler = new Handler(){
@@ -68,8 +74,6 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
             }
         };
 
-        sPref = getSharedPreferences("Variables", 0);
-        SharedPreferences.Editor ed = sPref.edit();
         if (sPref.getInt("color0", -1) == -1){ed.putInt("color0", 0);} // White
         if (sPref.getInt("color1", -1) == -1){ed.putInt("color1", 2);} // Green
         if (sPref.getInt("color2", -1) == -1){ed.putInt("color2", 3);} // Yellow
@@ -361,5 +365,13 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
     public void onBackPressed(){
         finish();
         overridePendingTransition(R.anim.sliderin_return, R.anim.sliderout_return);
+    }
+
+    void setLanguage(){
+        Locale locale = new Locale(sPref.getString("language", "en"));
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
     }
 }

@@ -2,6 +2,7 @@ package com.codji.justkilltime;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
 import java.util.Random;
 
 
@@ -40,10 +42,12 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mission);
-
         sPref = getSharedPreferences("Variables", 0);
         ed = sPref.edit();
+        setLanguage();
+
+        setContentView(R.layout.activity_mission);
+
         if (sPref.getInt("missionId0", -1) != -1){
             for (int i = 0; i < missionId.length; i++){
                 missionId[i] = sPref.getInt("missionId" + i, -1);
@@ -470,5 +474,13 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
         if (sPref.getInt("nowTrianglesColor", -1) != -1){
             rewards[sPref.getInt("nowTrianglesColor", -1) + 3].setBackground(getResources().getDrawable(R.drawable.style_btn_stroke_green));
         }
+    }
+
+    void setLanguage(){
+        Locale locale = new Locale(sPref.getString("language", "en"));
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
@@ -50,8 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         sPref = getSharedPreferences("Variables", 0);
+        setLanguage();
+
+        setContentView(R.layout.activity_main);
         time = sPref.getLong("time", 0);
 
         tapToPlay = (TextView)findViewById(R.id.tapToPlay);
@@ -262,5 +266,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ed.putLong("time", time);
 
         ed.commit();
+    }
+
+    void setLanguage(){
+        Locale locale = new Locale(sPref.getString("language", "en"));
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
     }
 }

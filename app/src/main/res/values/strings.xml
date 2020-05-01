@@ -1,25 +1,26 @@
 <resources>
     <string name="app_name">Just kill time</string>
     <string name="support">Жалобы и предложения</string>
-    <string name="web">Сайт</string>
-    <string name="shoop">Магазин</string>
-    <string name="higescore">Рекорд</string>
+    <string name="web">Web</string>
+    <string name="shoop">Shop</string>
+    <string name="higescore">Hige score</string>
     <string name="transitionOpasity">transition_opasity</string>
-    <string name="newHigescore">Новый рекорд</string>
-    <string name="playerColors">Цвета</string>
-    <string name="modes">Режимы</string>
-    <string name="white">Белый</string>
-    <string name="green">Зелённый</string>
-    <string name="yellow">Жёлтый</string>
-    <string name="peach">Персиковый</string>
-    <string name="skip">Пропустить</string>
-    <string name="get_started">Начать</string>
-    <string name="version">Версия 1.0.0</string>
-    <string name="language">Язык</string>
-    <string name="russian">Русский</string>
-    <string name="english">Английский</string>
-    <string name="option">Настройки</string>
-    <string name="aboutGame">Об игре</string>
+    <string name="newHigescore">New hige score</string>
+    <string name="playerColors">Colors</string>
+    <string name="modes">Modes</string>
+    <string name="white">White</string>
+    <string name="green">Green</string>
+    <string name="yellow">Yellow</string>
+    <string name="peach">Peach</string>
+    <string name="skip">Skip</string>
+    <string name="get_started">Get started</string>
+    <string name="version">Version 1.0.0</string>
+    <string name="language">Language</string>
+    <string name="russian">Russian</string>
+    <string name="english">English</string>
+    <string name="option">Settings</string>
+    <string name="aboutGame">About the game</string>
+
     <string name="moneyIntro">В верхнем правом углу отображается количество ваших очков, за которые вы можете что-либо приобрести в магазине</string>
     <string name="shoopIntro">Для перехода в магазин нажмите на иконку с корзиной</string>
     <string name="tapToPlayIntro">Нажмите в любой свободной части экрана, чтобы начать играть</string>
@@ -30,9 +31,10 @@
     <string name="productIntro">Товары в магазине отображаются в формате \"цвет | цена\" или \"угол поворота | цена\". Если вы ещё не купили товар то он будет подсвечен красным</string>
     <string name="tabsIntro">Товары в магазине делятся на \'цвета\' и \'режимы\'. Чтобы перейти к определённой группе, нажмите на нужную вкладку</string>
     <string name="codJiWeb">CodJi web</string>
-    <string name="supportText">Поддержка</string>
-    <string name="mission">Миссии</string>
-    <string name="statistics">Статистика</string>
+    <string name="supportText">Support</string>
+    <string name="mission">Missions</string>
+    <string name="statistics">Statistics</string>
+
     <string name="play">Игр сыграно</string>
     <string name="all_points">Количество набранных очков</string>
     <string name="time">Время в режиме игры</string>
@@ -41,12 +43,14 @@
     <string name="extra_lives">Потрачено дополнительных жизней</string>
     <string name="clicks_count">Количество нажатий</string>
     <string name="secondChance">Возродиться</string>
-    <string name="Blue">Синий</string>
-    <string name="Crimson">Малиновый</string>
-    <string name="Chocolate">Шоколадный</string>
-    <string name="Turquoise">Бирюзовый</string>
-    <string name="Orange">Оранжевый</string>
-    <string name="Pistachio">Фисташковый</string>
+
+    <string name="Blue">Blue</string>
+    <string name="Crimson">Crimson</string>
+    <string name="Chocolate">Chocolate</string>
+    <string name="Turquoise">Turquoise</string>
+    <string name="Orange">Orange</string>
+    <string name="Pistachio">Pistachio</string>
+
     <string name="missionsIntro">Для перехода к списку миссий нажмите на иконку справа</string>
     <string name="statisticsIntro">Нажав на иконку слева вы перейдёте к своей статистике</string>
     <string name="missionsItemIntro">Каждый элемент списка миссий состоит из текста задания слева и прогресса по заданию справа</string>
@@ -54,6 +58,8 @@
     <string name="displayTimerIntro">После первой смерти вы можете продолжить игру, потратив дополнительную жизнь. Их количество отображается в центре всплывающего после смерти окна. Для принятия решения отводится 5 секунд</string>
     <string name="godModIntro">При подборе зелённого треугольника вы становитесь неуязвимым на 3 секунды. Таймер, который появляется при этом, в левом верхнем углу, показывает сколько времени этот режим будет активен</string>
     <string name="HaveNiceGame">Приятной игры</string>
+    <string name="left"><![CDATA[<]]></string>
+    <string name="right"><![CDATA[>]]></string>
 
     <array name="missions">
         <item name="mission0">Наберите n очков</item>

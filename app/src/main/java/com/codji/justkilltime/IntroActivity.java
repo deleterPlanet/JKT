@@ -2,6 +2,7 @@ package com.codji.justkilltime;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -16,6 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -27,11 +29,15 @@ public class IntroActivity extends AppCompatActivity {
     Button btnGetStarted;
     Animation btnAnim ;
     TextView tvSkip;
+    SharedPreferences sPref;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sPref = getSharedPreferences("Variables", 0);
+        setLanguage();
+
         setContentView(R.layout.activity_intro);
 
         if (restorePrefData() && !OptionActivity.ISOpenIntro) {
@@ -141,5 +147,13 @@ public class IntroActivity extends AppCompatActivity {
         tvSkip.setVisibility(View.INVISIBLE);
         tabIndicator.setVisibility(View.INVISIBLE);
         btnGetStarted.setAnimation(btnAnim);
+    }
+
+    void setLanguage(){
+        Locale locale = new Locale(sPref.getString("language", "en"));
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
     }
 }

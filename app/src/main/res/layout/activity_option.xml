@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainRelativeLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -111,10 +112,14 @@
                     android:gravity="left"
                     android:layout_weight="4"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
+                    android:theme="@style/Switch"
                     android:id="@+id/languageSwitch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textOff="@string/left"
+                    android:textOn="@string/right"
+                    app:showText="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"

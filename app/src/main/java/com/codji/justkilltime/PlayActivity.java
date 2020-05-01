@@ -2,6 +2,7 @@ package com.codji.justkilltime;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Date;
+import java.util.Locale;
 
 public class PlayActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -49,8 +51,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.play_activity);
         sPref = getSharedPreferences("Variables", 0);
+        setLanguage();
+
+        setContentView(R.layout.play_activity);
 
         ISSecondChance = false;
 
@@ -202,4 +206,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public void onBackPressed(){}
+
+    void setLanguage(){
+        Locale locale = new Locale(sPref.getString("language", "en"));
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+    }
 }
