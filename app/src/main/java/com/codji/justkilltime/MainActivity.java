@@ -19,7 +19,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
-    public static final int  REQ_COD_PLAY_ACTIVITY = 1;
+    public static final int  REQ_COD_PLAY_ACTIVITY = 1,
+                            REQ_COD_OPTION_ACTIVITY = 2;
     public static int higescore = 0;
 
     private int money = 0, score;
@@ -52,58 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sPref = getSharedPreferences("Variables", 0);
-        setLanguage();
-
-        setContentView(R.layout.activity_main);
-        time = sPref.getLong("time", 0);
-
-        tapToPlay = (TextView)findViewById(R.id.tapToPlay);
-        tapToPlay.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_tap_to_play));
-
-        //обработка кнопок
-        View.OnClickListener ocl_but = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()){
-                    case R.id.shoop:
-                        intent = new Intent(MainActivity.this, ShoopActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.sliderin, R.anim.sliderout);
-                        break;
-                    case R.id.option:
-                        intent = new Intent(MainActivity.this, OptionActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slider_down, R.anim.null_anim);
-                        break;
-                    case R.id.mission:
-                        intent = new Intent(MainActivity.this, MissionActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.sliderin_left, R.anim.sliderout_left);
-                        break;
-                    case R.id.statistics:
-                        intent = new Intent(MainActivity.this, StatisticsActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.sliderin_right, R.anim.sliderout_right);
-                }
-            }
-        };
-
-        missionBut = (ImageButton)findViewById(R.id.mission);
-        shoopBut = (ImageButton)findViewById(R.id.shoop);
-        statisticsBut = (ImageButton)findViewById(R.id.statistics);
-        optionBut = (ImageButton)findViewById(R.id.option);
-
-        missionBut.setOnClickListener(ocl_but);
-        shoopBut.setOnClickListener(ocl_but);
-        statisticsBut.setOnClickListener(ocl_but);
-        optionBut.setOnClickListener(ocl_but);
-
-        relLayout = (RelativeLayout)findViewById(R.id.mainRelativeLayout);
-        relLayout.setOnTouchListener(this);
-
-        glSurfaceViewMoney = (GLSurfaceView)findViewById(R.id.glSurfaceViewMoney);
-        glSurfaceViewMoney.setRenderer(new MoneyOpenGLRenderer());
+        setContent();
     }
 
     @Override
@@ -121,24 +71,29 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if (data == null){return;}
-        ed = sPref.edit();
+        switch (requestCode){
+            case REQ_COD_OPTION_ACTIVITY: setLanguage(); setContent(); break;
+            case REQ_COD_PLAY_ACTIVITY:
+                if (data == null){return;}
+                ed = sPref.edit();
 
-        time += data.getLongExtra("time", 0);
+                time += data.getLongExtra("time", 0);
 
-        score = data.getIntExtra("score", 0);
-        money += score;
-        moneyText.setText(money + "");
+                score = data.getIntExtra("score", 0);
+                money += score;
+                moneyText.setText(money + "");
 
-        checkMission(score, data.getLongExtra("time", 0));
+                checkMission(score, data.getLongExtra("time", 0));
 
-        if (score > higescore){
-            higescore = score;
-            higescoreText.setText(score + "");
-            ed.putInt("higescore", score);
+                if (score > higescore){
+                    higescore = score;
+                    higescoreText.setText(score + "");
+                    ed.putInt("higescore", score);
+                }
+
+                save();
+                break;
         }
-
-        save();
     }
 
     void checkMission(int score, long time){
@@ -274,5 +229,60 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Configuration configuration = new Configuration();
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    void setContent(){
+        sPref = getSharedPreferences("Variables", 0);
+        setLanguage();
+
+        setContentView(R.layout.activity_main);
+        time = sPref.getLong("time", 0);
+
+        tapToPlay = (TextView)findViewById(R.id.tapToPlay);
+        tapToPlay.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_tap_to_play));
+
+        //обработка кнопок
+        View.OnClickListener ocl_but = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.shoop:
+                        intent = new Intent(MainActivity.this, ShoopActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.sliderin, R.anim.sliderout);
+                        break;
+                    case R.id.option:
+                        intent = new Intent(MainActivity.this, OptionActivity.class);
+                        startActivityForResult(intent, REQ_COD_OPTION_ACTIVITY);
+                        overridePendingTransition(R.anim.slider_down, R.anim.null_anim);
+                        break;
+                    case R.id.mission:
+                        intent = new Intent(MainActivity.this, MissionActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.sliderin_left, R.anim.sliderout_left);
+                        break;
+                    case R.id.statistics:
+                        intent = new Intent(MainActivity.this, StatisticsActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.sliderin_right, R.anim.sliderout_right);
+                }
+            }
+        };
+
+        missionBut = (ImageButton)findViewById(R.id.mission);
+        shoopBut = (ImageButton)findViewById(R.id.shoop);
+        statisticsBut = (ImageButton)findViewById(R.id.statistics);
+        optionBut = (ImageButton)findViewById(R.id.option);
+
+        missionBut.setOnClickListener(ocl_but);
+        shoopBut.setOnClickListener(ocl_but);
+        statisticsBut.setOnClickListener(ocl_but);
+        optionBut.setOnClickListener(ocl_but);
+
+        relLayout = (RelativeLayout)findViewById(R.id.mainRelativeLayout);
+        relLayout.setOnTouchListener(this);
+
+        glSurfaceViewMoney = (GLSurfaceView)findViewById(R.id.glSurfaceViewMoney);
+        glSurfaceViewMoney.setRenderer(new MoneyOpenGLRenderer());
     }
 }

@@ -194,9 +194,17 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     }
 
     void checkCollTriangle(float coord[], boolean ISItGreenTriangle){
+        float newCoord[] = new float[]{ // Центры сторон тр-ка
+                (coord[0]+coord[3])/2, (coord[1]+coord[4])/2,
+                (coord[0]+coord[6])/2, (coord[1]+coord[7])/2,
+                (coord[3]+coord[6])/2, (coord[4]+coord[7])/2
+        };
         if (((coord[0] < playerSpeed*frameNum+rad*0.75 && coord[0] > playerSpeed*frameNum-rad*0.5 && coord[1] > -rad*0.5 && coord[1] < rad*0.5)
         || (coord[3] < playerSpeed*frameNum+rad*0.75 && coord[3] > playerSpeed*frameNum-rad*0.5 && coord[4] > -rad*0.5 && coord[4] < rad*0.5)
-        || (coord[6] < playerSpeed*frameNum+rad*0.75 && coord[6] > playerSpeed*frameNum-rad*0.5 && coord[7] > -rad*0.5 && coord[7] < rad*0.5))
+        || (coord[6] < playerSpeed*frameNum+rad*0.75 && coord[6] > playerSpeed*frameNum-rad*0.5 && coord[7] > -rad*0.5 && coord[7] < rad*0.5)
+        || (newCoord[0] < playerSpeed*frameNum+rad*0.75 && newCoord[0] > playerSpeed*frameNum-rad*0.5 && newCoord[1] > -rad*0.5 && newCoord[1] < rad*0.5)
+        || (newCoord[2] < playerSpeed*frameNum+rad*0.75 && newCoord[2] > playerSpeed*frameNum-rad*0.5 && newCoord[3] > -rad*0.5 && newCoord[3] < rad*0.5)
+        || (newCoord[4] < playerSpeed*frameNum+rad*0.75 && newCoord[4] > playerSpeed*frameNum-rad*0.5 && newCoord[5] > -rad*0.5 && newCoord[5] < rad*0.5))
         && new Date().getTime() - startGodMod > 3000){
             if(ISItGreenTriangle){
                 if(!ISGetGreenTriangle){

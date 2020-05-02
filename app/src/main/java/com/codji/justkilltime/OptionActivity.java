@@ -53,7 +53,10 @@ public class OptionActivity extends AppCompatActivity implements View.OnClickLis
                     ed.putString("language", "ru");
                 }
                 ed.commit();
+                intent = new Intent(OptionActivity.this, OptionActivity.class);
+                startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.alpha_for_transition_in, R.anim.alpha_for_transition_out);
             }
         };
 
@@ -91,6 +94,8 @@ public class OptionActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed(){
+        intent = new Intent();
+        setResult(RESULT_OK, intent);
         finish();
         overridePendingTransition(R.anim.null_anim, R.anim.sliderout);
     }

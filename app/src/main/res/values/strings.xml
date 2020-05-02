@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Just kill time</string>
-    <string name="support">Жалобы и предложения</string>
+    <string name="support">Complaints and suggestions</string>
     <string name="web">Web</string>
     <string name="shoop">Shop</string>
-    <string name="higescore">Hige score</string>
+    <string name="higescore">High score</string>
     <string name="transitionOpasity">transition_opasity</string>
-    <string name="newHigescore">New hige score</string>
+    <string name="newHigescore">New high score</string>
     <string name="playerColors">Colors</string>
     <string name="modes">Modes</string>
     <string name="white">White</string>
@@ -30,20 +30,19 @@
     <string name="exampleIntro">Вы можете посмотреть как будет выглядеть выбранный вами цвет прямо в магазине</string>
     <string name="productIntro">Товары в магазине отображаются в формате \"цвет | цена\" или \"угол поворота | цена\". Если вы ещё не купили товар то он будет подсвечен красным</string>
     <string name="tabsIntro">Товары в магазине делятся на \'цвета\' и \'режимы\'. Чтобы перейти к определённой группе, нажмите на нужную вкладку</string>
+
     <string name="codJiWeb">CodJi web</string>
     <string name="supportText">Support</string>
     <string name="mission">Missions</string>
     <string name="statistics">Statistics</string>
-
-    <string name="play">Игр сыграно</string>
-    <string name="all_points">Количество набранных очков</string>
-    <string name="time">Время в режиме игры</string>
-    <string name="goods">Количество приобретённых в магазине товаров</string>
-    <string name="missions_complete">Количествово пройденных миссий</string>
-    <string name="extra_lives">Потрачено дополнительных жизней</string>
-    <string name="clicks_count">Количество нажатий</string>
-    <string name="secondChance">Возродиться</string>
-
+    <string name="play">Games played</string>
+    <string name="all_points">Number of points</string>
+    <string name="time">Time in game mode</string>
+    <string name="goods">The number of goods purchased in the store</string>
+    <string name="missions_complete">Number of missions completed</string>
+    <string name="extra_lives">Extra lives spent</string>
+    <string name="clicks_count">Number of clicks</string>
+    <string name="secondChance">Respawn</string>
     <string name="Blue">Blue</string>
     <string name="Crimson">Crimson</string>
     <string name="Chocolate">Chocolate</string>
@@ -57,9 +56,11 @@
     <string name="missionsCompleteItem">Выполняя 3 задания, вы получаете дополнительную жизнь, которую можно потратить при игре. Индикатор сверху показывает сколько осталось выполнить миссий для получения награды</string>
     <string name="displayTimerIntro">После первой смерти вы можете продолжить игру, потратив дополнительную жизнь. Их количество отображается в центре всплывающего после смерти окна. Для принятия решения отводится 5 секунд</string>
     <string name="godModIntro">При подборе зелённого треугольника вы становитесь неуязвимым на 3 секунды. Таймер, который появляется при этом, в левом верхнем углу, показывает сколько времени этот режим будет активен</string>
-    <string name="HaveNiceGame">Приятной игры</string>
+
+    <string name="HaveNiceGame">Have a nice game</string>
     <string name="left"><![CDATA[<]]></string>
     <string name="right"><![CDATA[>]]></string>
+    <string name="buy_rewards">Buy skin for 10</string>
 
     <array name="missions">
         <item name="mission0">Наберите n очков</item>
