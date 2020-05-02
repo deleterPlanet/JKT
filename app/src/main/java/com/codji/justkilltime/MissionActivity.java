@@ -26,7 +26,7 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
 
     int NowMission[] = new int[]{missionId.length, missionId.length, missionId.length};
     final String TAG = "MyTag";
-    int randMis, randN, progress, extraLivesCount, defCount = 6;
+    int randMis, randN, progress, extraLivesCount, defCount = 1;
     String missions[] = new String[]{};
     TextView mission0, mission1, mission2;
     ImageView imgs[];

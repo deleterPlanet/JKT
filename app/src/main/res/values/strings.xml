@@ -60,7 +60,7 @@
     <string name="HaveNiceGame">Have a nice game</string>
     <string name="left"><![CDATA[<]]></string>
     <string name="right"><![CDATA[>]]></string>
-    <string name="buy_rewards">Buy skin for 10</string>
+    <string name="buy_rewards">Buy skin for 1</string>
 
     <array name="missions">
         <item name="mission0">Наберите n очков</item>
