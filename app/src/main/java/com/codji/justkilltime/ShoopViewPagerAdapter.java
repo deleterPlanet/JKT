@@ -95,22 +95,33 @@ public class ShoopViewPagerAdapter extends PagerAdapter {
     }
 
     void fillModesSet(){
+        SharedPreferences sPref = mContext.getSharedPreferences("Variables", 0);
         modesSet = new Button[6];
         modesSet[0] = layoutScreen.findViewById(R.id.deg0);
         modesSet[1] = layoutScreen.findViewById(R.id.deg90);
         modesSet[2] = layoutScreen.findViewById(R.id.deg180);
         modesSet[3] = layoutScreen.findViewById(R.id.deg270);
-        modesSet[4] = layoutScreen.findViewById(R.id.deg45);
-        modesSet[5] = layoutScreen.findViewById(R.id.deg315);
+        modesSet[4] = layoutScreen.findViewById(R.id.deg0_360);
+        modesSet[5] = layoutScreen.findViewById(R.id.degRand);
 
-        for (int i = 0; i < modesSet.length; i++){
-            SharedPreferences sPref = mContext.getSharedPreferences("Variables", 0);
+        for (int i = 0; i < modesSet.length-2; i++){
             String s = modesSet[i].getText().toString().split("°")[0];
             if (sPref.getInt("deg" + s, 0) > 0) {
                 modesSet[i].setTextColor(mContext.getResources().getColor(R.color.notBuy));
-                modesSet[i].setText(s + "° | " + sPref.getInt("color" + i, 0));
+                modesSet[i].setText(s + "° | " + sPref.getInt("deg" + i*90, 0));
             }
             modesSet[i].setOnClickListener((View.OnClickListener) mContext);
         }
+
+        if (sPref.getInt("deg0_360", 0) > 0) {
+            modesSet[4].setTextColor(mContext.getResources().getColor(R.color.notBuy));
+            modesSet[4].setText("0-360° | " + sPref.getInt("deg0_360", 0));
+        }
+        if (sPref.getInt("degRand", 0) > 0) {
+            modesSet[5].setTextColor(mContext.getResources().getColor(R.color.notBuy));
+            modesSet[5].setText("?° | " + sPref.getInt("degRand", 0));
+        }
+        modesSet[4].setOnClickListener((View.OnClickListener) mContext);
+        modesSet[5].setOnClickListener((View.OnClickListener) mContext);
     }
 }

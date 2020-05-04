@@ -75,21 +75,21 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
         };
 
         if (sPref.getInt("color0", -1) == -1){ed.putInt("color0", 0);} // White
-        if (sPref.getInt("color1", -1) == -1){ed.putInt("color1", 2);} // Green
-        if (sPref.getInt("color2", -1) == -1){ed.putInt("color2", 3);} // Yellow
-        if (sPref.getInt("color3", -1) == -1){ed.putInt("color3", 4);} // Peach
-        if (sPref.getInt("color4", -1) == -1){ed.putInt("color4", 5);} // Blue
-        if (sPref.getInt("color5", -1) == -1){ed.putInt("color5", 6);} // Crimson
-        if (sPref.getInt("color6", -1) == -1){ed.putInt("color6", 7);} // Chocolate
-        if (sPref.getInt("color7", -1) == -1){ed.putInt("color7", 8);} // Pistachio
-        if (sPref.getInt("color8", -1) == -1){ed.putInt("color8", 9);} // Orange
-        if (sPref.getInt("color9", -1) == -1){ed.putInt("color9", 10);} // Turquoise
+        if (sPref.getInt("color1", -1) == -1){ed.putInt("color1", 20);} // Green
+        if (sPref.getInt("color2", -1) == -1){ed.putInt("color2", 30);} // Yellow
+        if (sPref.getInt("color3", -1) == -1){ed.putInt("color3", 40);} // Peach
+        if (sPref.getInt("color4", -1) == -1){ed.putInt("color4", 50);} // Blue
+        if (sPref.getInt("color5", -1) == -1){ed.putInt("color5", 60);} // Crimson
+        if (sPref.getInt("color6", -1) == -1){ed.putInt("color6", 70);} // Chocolate
+        if (sPref.getInt("color7", -1) == -1){ed.putInt("color7", 80);} // Pistachio
+        if (sPref.getInt("color8", -1) == -1){ed.putInt("color8", 90);} // Orange
+        if (sPref.getInt("color9", -1) == -1){ed.putInt("color9", 100);} // Turquoise
         if (sPref.getInt("deg0", -1) == -1){ed.putInt("deg0", 0);}
-        if (sPref.getInt("deg90", -1) == -1){ed.putInt("deg90", 2);}
-        if (sPref.getInt("deg180", -1) == -1){ed.putInt("deg180", 3);}
-        if (sPref.getInt("deg270", -1) == -1){ed.putInt("deg270", 4);}
-        if (sPref.getInt("deg45", -1) == -1){ed.putInt("deg45", 30);}
-        if (sPref.getInt("deg315", -1) == -1){ed.putInt("deg315", 40);}
+        if (sPref.getInt("deg90", -1) == -1){ed.putInt("deg90", 20);}
+        if (sPref.getInt("deg180", -1) == -1){ed.putInt("deg180", 40);}
+        if (sPref.getInt("deg270", -1) == -1){ed.putInt("deg270", 60);}
+        if (sPref.getInt("deg0_360", -1) == -1){ed.putInt("deg0_360", 80);}
+        if (sPref.getInt("degRand", -1) == -1){ed.putInt("degRand", 100);}
         ed.commit();
 
         playerColor[0] = sPref.getFloat("playerRed", 1.0f);
@@ -331,6 +331,34 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
                     ed.putFloat("angleMap", 270.0f);
                 }
                 break;
+            case R.id.deg0_360:
+                cost = sPref.getInt("deg0_360", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("deg0_360", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("angleMap", 360.0f);
+                }
+                break;
+            case R.id.degRand:
+                cost = sPref.getInt("degRand", -1);
+                if (cost <= money && cost != -1){
+                    if (cost > 0){
+                        money -= cost;
+                        moneyText.setText(money + "");
+                        ed.putInt("degRand", 0);
+                        but.setText(but.getText().toString().split(" ")[0]);
+                        but.setTextColor(getResources().getColor(R.color.colorAccent));
+                        ed.putInt("goods", sPref.getInt("goods", 1) + 1);
+                    }
+                    ed.putFloat("angleMap", -1.0f);
+                }
+                break;
             case R.id.modes:
                 modesBut.setTextSize(25.0f);
                 modesBut.setTextColor(getResources().getColor(R.color.colorAccent));
@@ -368,6 +396,7 @@ public class ShoopActivity extends AppCompatActivity implements View.OnClickList
     }
 
     void setLanguage(){
+        if(!sPref.getBoolean("ISSetLocale", false)){return;}
         Locale locale = new Locale(sPref.getString("language", "en"));
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();

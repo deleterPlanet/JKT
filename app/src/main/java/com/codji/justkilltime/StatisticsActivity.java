@@ -46,6 +46,7 @@ public class StatisticsActivity extends AppCompatActivity{
     }
 
     void setLanguage(){
+        if(!sPref.getBoolean("ISSetLocale", false)){return;}
         Locale locale = new Locale(sPref.getString("language", "en"));
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();

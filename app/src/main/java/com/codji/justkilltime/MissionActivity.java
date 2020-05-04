@@ -26,7 +26,7 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
 
     int NowMission[] = new int[]{missionId.length, missionId.length, missionId.length};
     final String TAG = "MyTag";
-    int randMis, randN, progress, extraLivesCount, defCount = 1;
+    int randMis, randN, progress, extraLivesCount, defCount = 10;
     String missions[] = new String[]{};
     TextView mission0, mission1, mission2;
     ImageView imgs[];
@@ -381,15 +381,17 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
         }
         randN = sPref.getInt("N" + randMis, 0) + ((randMis == 0 || randMis == 3)? (int)Math.round((Math.random())) + 1 : 1);
         if (randMis < 5){
-            String s[] = missions[randMis].split("n");
-            if(randN%10 == 1 && (randN-randN%10)/10%10 != 1){
-                s[1] = s[1].replace("секунд", "секунду");
-                s[1] = s[1].replace("очков", "очко");
-            }
-            if((randN%10 == 2 || randN%10 == 3 || randN%10 == 4) && (randN-randN%10)/10%10 != 1){
-                s[1] = s[1].replace("секунд", "секунды");
-                s[1] = s[1].replace("очков", "очка");
-                s[1] = s[1].replace("раз", "раза");
+            String s[] = missions[randMis].split("/?");
+            if(sPref.getString("language", "en") == "ru") {
+                if (randN % 10 == 1 && (randN - randN % 10) / 10 % 10 != 1) {
+                    s[1] = s[1].replace("секунд", "секунду");
+                    s[1] = s[1].replace("очков", "очко");
+                }
+                if ((randN % 10 == 2 || randN % 10 == 3 || randN % 10 == 4) && (randN - randN % 10) / 10 % 10 != 1) {
+                    s[1] = s[1].replace("секунд", "секунды");
+                    s[1] = s[1].replace("очков", "очка");
+                    s[1] = s[1].replace("раз", "раза");
+                }
             }
             missionText.setText(s[0] + randN + s[1]);
             ed.putString("missionText" + pos, s[0] + randN + s[1]);
@@ -477,6 +479,7 @@ public class MissionActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     void setLanguage(){
+        if(!sPref.getBoolean("ISSetLocale", false)){return;}
         Locale locale = new Locale(sPref.getString("language", "en"));
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();

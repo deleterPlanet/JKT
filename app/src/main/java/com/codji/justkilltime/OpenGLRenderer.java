@@ -13,7 +13,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
-    private long startGodMod, startSecondChanceDialog;
+    private long startGodMod, startSecondChanceDialog, randDegTime, maxRandDegTime = 5000;
     private int triangleCount = 6,
             frameNum = 0,
             score = 0;
@@ -27,7 +27,8 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
             tellestTrianglePos,
             minSw = 0.001f,
             screeWidth = 1.6f,
-            angleMap,
+            angleMap = 0.0f,
+            newAngleMap,
             playerVertices;
     private float vertices[][],
             centers[][];
@@ -39,7 +40,9 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
             sw[];
     private boolean ISGreenTriangle = false,
             ISGetGreenTriangle = false,
-            ISDeath = false;
+            ISDeath = false,
+            IS0_360 = false,
+            ISRandDeg = false;
     private final String TAG = "MyTag";
     ByteBuffer byteBuffer;
     FloatBuffer vertexBuffer,
@@ -60,12 +63,20 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         emptyTrianglesColor[3] = trianglesColor[3];
 
         this.playerVertices = playerVertices;
+
+        IS0_360 = angleMap == 360.0f;
+        ISRandDeg = angleMap == -1.0f;
     }
 
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         gl.glClearColor(0.08f,0.09f,0.1f,1.0f);
+
+        if (ISRandDeg){
+            randDegTime = new Date().getTime();
+            angleMap = newAngleMap = 0.0f;
+        }
 
         speedX = new float[triangleCount + 1];
         angles = new float[triangleCount + 1];
@@ -367,14 +378,32 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     }
 
     void setAngleMap(GL10 gl){
-        if (angleMap == 90.0f || angleMap == 270.0f){
+        gl.glScalef(1.0f,PlayActivity.scaleY,1.0f);
+        gl.glRotatef(angleMap, 0.0f, 0.0f, 1.0f);
+
+        if (IS0_360){
+            angleMap += 0.5f;
+            return;
+        }
+
+        if(ISRandDeg){
+            if(new Date().getTime() - randDegTime >= maxRandDegTime){
+                newAngleMap = Math.round(Math.random()*3)*90.0f;
+                randDegTime = new Date().getTime();
+            }else{
+                if (Math.sqrt((newAngleMap - angleMap)*(newAngleMap - angleMap)) < 5.0f){
+                    angleMap = newAngleMap;
+                    return;
+                }
+                angleMap += (newAngleMap < angleMap)? -5.0f : 5.0f;
+            }
+        }
+
+        if ((angleMap == 90.0f || angleMap == 270.0f) && !ISRandDeg){
             gl.glScalef(PlayActivity.scaleY,PlayActivity.scaleY,1.0f);
             screeWidth = 3.0f;
             triangleCount = 15;
-        }else{
-            gl.glScalef(1.0f,PlayActivity.scaleY,1.0f);
         }
-        gl.glRotatef(angleMap, 0.0f, 0.0f, 1.0f);
     }
 
     void death(){

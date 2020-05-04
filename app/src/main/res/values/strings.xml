@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Just kill time</string>
+    <string name="app_name" translatable="false">Just kill time</string>
     <string name="support">Complaints and suggestions</string>
     <string name="web">Web</string>
     <string name="shoop">Shop</string>
     <string name="higescore">High score</string>
-    <string name="transitionOpasity">transition_opasity</string>
+    <string name="transitionOpasity" translatable="false">transition_opasity</string>
     <string name="newHigescore">New high score</string>
     <string name="playerColors">Colors</string>
     <string name="modes">Modes</string>
@@ -20,18 +20,16 @@
     <string name="english">English</string>
     <string name="option">Settings</string>
     <string name="aboutGame">About the game</string>
-
-    <string name="moneyIntro">В верхнем правом углу отображается количество ваших очков, за которые вы можете что-либо приобрести в магазине</string>
-    <string name="shoopIntro">Для перехода в магазин нажмите на иконку с корзиной</string>
-    <string name="tapToPlayIntro">Нажмите в любой свободной части экрана, чтобы начать играть</string>
-    <string name="playerIntro">Нажимайте на икран, чтобы поменять напровление движения игрока</string>
-    <string name="trianglesIntro">Уворачивайтесь от серых треугольников и собирайте зелённые</string>
-    <string name="scoreIntro">Снизу отображается количество ваших очков</string>
-    <string name="exampleIntro">Вы можете посмотреть как будет выглядеть выбранный вами цвет прямо в магазине</string>
-    <string name="productIntro">Товары в магазине отображаются в формате \"цвет | цена\" или \"угол поворота | цена\". Если вы ещё не купили товар то он будет подсвечен красным</string>
-    <string name="tabsIntro">Товары в магазине делятся на \'цвета\' и \'режимы\'. Чтобы перейти к определённой группе, нажмите на нужную вкладку</string>
-
-    <string name="codJiWeb">CodJi web</string>
+    <string name="moneyIntro">In the upper right corner displays the number of your points for which you can buy anything in the store</string>
+    <string name="shoopIntro">To go to the store, click on the basket icon</string>
+    <string name="tapToPlayIntro">Click anywhere on the screen to start playing</string>
+    <string name="playerIntro">Click on the screen to change the direction of movement of the player</string>
+    <string name="trianglesIntro">Dodge gray triangles and collect green ones</string>
+    <string name="scoreIntro">The number of your points is displayed below</string>
+    <string name="exampleIntro">You can see how your chosen color will look right in the store</string>
+    <string name="productIntro">Products in the store are displayed in the format \"color | price\" or \"rotation angle | price\". If you have not bought the product, it will be highlighted in red</string>
+    <string name="tabsIntro">Products in the store are divided into \'colors\' and \'modes\'. To go to a specific group, click on the desired tab</string>
+    <string name="codJiWeb" translatable="false">CodJi web</string>
     <string name="supportText">Support</string>
     <string name="mission">Missions</string>
     <string name="statistics">Statistics</string>
@@ -49,25 +47,24 @@
     <string name="Turquoise">Turquoise</string>
     <string name="Orange">Orange</string>
     <string name="Pistachio">Pistachio</string>
-
-    <string name="missionsIntro">Для перехода к списку миссий нажмите на иконку справа</string>
-    <string name="statisticsIntro">Нажав на иконку слева вы перейдёте к своей статистике</string>
-    <string name="missionsItemIntro">Каждый элемент списка миссий состоит из текста задания слева и прогресса по заданию справа</string>
-    <string name="missionsCompleteItem">Выполняя 3 задания, вы получаете дополнительную жизнь, которую можно потратить при игре. Индикатор сверху показывает сколько осталось выполнить миссий для получения награды</string>
-    <string name="displayTimerIntro">После первой смерти вы можете продолжить игру, потратив дополнительную жизнь. Их количество отображается в центре всплывающего после смерти окна. Для принятия решения отводится 5 секунд</string>
-    <string name="godModIntro">При подборе зелённого треугольника вы становитесь неуязвимым на 3 секунды. Таймер, который появляется при этом, в левом верхнем углу, показывает сколько времени этот режим будет активен</string>
-
+    <string name="missionsIntro">To go to the list of missions, click on the icon on the right</string>
+    <string name="statisticsIntro">By clicking on the icon on the left you will go to your statistics</string>
+    <string name="missionsItemIntro">Each element of the mission list consists of the task text on the left and the progress on the task on the right</string>
+    <string name="missionsCompleteItem">Performing 3 tasks, you get an extra life that you can spend on the game. The indicator at the top shows how many missions are left to complete the rewards</string>
+    <string name="displayTimerIntro">After the first death, you can continue the game by spending an extra life. Their number is displayed in the center of the pop-up window after death. It takes 5 seconds to make a decision</string>
+    <string name="godModIntro">When selecting a green triangle, you become invulnerable for 3 seconds. The timer that appears in the upper left corner shows how long this mode will be active</string>
     <string name="HaveNiceGame">Have a nice game</string>
-    <string name="left"><![CDATA[<]]></string>
-    <string name="right"><![CDATA[>]]></string>
-    <string name="buy_rewards">Buy skin for 1</string>
+    <string name="left" translatable="false"><![CDATA[<]]></string>
+    <string name="right" translatable="false"><![CDATA[>]]></string>
+    <string name="randomDeg" translatable="false">\?°</string>
+    <string name="buy_rewards">Buy skin for 10</string>
 
     <array name="missions">
-        <item name="mission0">Наберите n очков</item>
-        <item name="mission1">Наберите n очков за одну игру</item>
-        <item name="mission2">Продержитесь n секунд</item>
-        <item name="mission3">Проведите n секунд в игре</item>
-        <item name="mission4">Сыграйте n раз</item>
-        <item name="mission5">Побейте свой рекорд</item>
+        <item name="mission0">Score ? points</item>
+        <item name="mission1">Score ? points in one game</item>
+        <item name="mission2">Hold on ? seconds</item>
+        <item name="mission3">Spend ? seconds in the game</item>
+        <item name="mission4">Play ? times</item>
+        <item name="mission5">Beat your record</item>
     </array>
 </resources>

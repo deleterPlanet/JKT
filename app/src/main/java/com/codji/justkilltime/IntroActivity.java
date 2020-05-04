@@ -142,6 +142,13 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void loaddLastScreen() {
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putBoolean("ISSetLocale", true);
+        if (tvSkip.getText().equals("Skip")){
+            ed.putString("language", "en");
+        }else{
+            ed.putString("language", "ru");
+        }
         btnNext.setVisibility(View.INVISIBLE);
         btnGetStarted.setVisibility(View.VISIBLE);
         tvSkip.setVisibility(View.INVISIBLE);
@@ -150,6 +157,7 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     void setLanguage(){
+        if(!sPref.getBoolean("ISSetLocale", false)){return;}
         Locale locale = new Locale(sPref.getString("language", "en"));
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();

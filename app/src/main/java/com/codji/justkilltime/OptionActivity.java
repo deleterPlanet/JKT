@@ -52,6 +52,7 @@ public class OptionActivity extends AppCompatActivity implements View.OnClickLis
                 }else{
                     ed.putString("language", "ru");
                 }
+                ed.putBoolean("ISSetLocale", true);
                 ed.commit();
                 intent = new Intent(OptionActivity.this, OptionActivity.class);
                 startActivity(intent);
@@ -61,12 +62,12 @@ public class OptionActivity extends AppCompatActivity implements View.OnClickLis
         };
 
         languageSwitch = findViewById(R.id.languageSwitch);
-        if (sPref.getString("language", "en").equals("en")){languageSwitch.setChecked(true);}
+        languageSwitch.setChecked(sPref.getString("language", "en").equals("en") && sPref.getBoolean("ISSetLocale", false));
         languageSwitch.setOnCheckedChangeListener(onChecked);
 
-        aboutGame = (LinearLayout)findViewById(R.id.aboutGameLayout);
-        web = (LinearLayout)findViewById(R.id.web);
-        support = (LinearLayout)findViewById(R.id.support);
+        aboutGame = findViewById(R.id.aboutGameLayout);
+        web = findViewById(R.id.web);
+        support = findViewById(R.id.support);
         aboutGame.setOnClickListener(this);
         web.setOnClickListener(this);
         support.setOnClickListener(this);
@@ -101,6 +102,7 @@ public class OptionActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     void setLanguage(){
+        if(!sPref.getBoolean("ISSetLocale", false)){return;}
         Locale locale = new Locale(sPref.getString("language", "en"));
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();

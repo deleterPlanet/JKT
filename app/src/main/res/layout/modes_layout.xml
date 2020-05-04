@@ -41,16 +41,16 @@
             android:background="@drawable/option_but"/>
 
         <Button
-            android:id="@+id/deg45"
+            android:id="@+id/deg0_360"
             style="@style/MainActivityOptionButtons"
             android:background="@drawable/option_but"
-            android:text="45°"/>
+            android:text="0-360°"/>
 
         <Button
-            android:id="@+id/deg315"
+            android:id="@+id/degRand"
             style="@style/MainActivityOptionButtons"
             android:background="@drawable/option_but"
-            android:text="315°"/>
+            android:text="@string/randomDeg"/>
 
     </LinearLayout>
 
